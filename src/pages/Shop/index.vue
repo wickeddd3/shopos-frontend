@@ -25,7 +25,7 @@
 
         <div class="my-4">
           <v-row>
-            <v-col cols="2" v-for="(n, index) in 35" :key="n+index">
+            <v-col v-for="(n, index) in 35" :key="n+index" cols="2">
               <v-card>
                 <v-img
                   height="100px"

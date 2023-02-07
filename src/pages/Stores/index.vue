@@ -17,13 +17,12 @@
             <v-btn
               icon
               v-bind="attrs"
-              to="/users/create"
               v-on="on"
             >
-              <v-icon>mdi-account-plus-outline</v-icon>
+              <v-icon>mdi-plus-circle-outline</v-icon>
             </v-btn>
           </template>
-          Add User
+          Add Store
         </v-tooltip>
       </v-col>
     </v-row>
@@ -49,25 +48,25 @@ import { mapGetters, mapActions } from 'vuex';
 import AppContent from '@/components/App/AppContent';
 
 export default {
-  name: 'Users',
+  name: 'Stores',
   components: {
     AppContent,
   },
   computed: {
     ...mapGetters({
-      ready: 'users/list/ready',
-      headers: 'users/list/headers',
-      loading: 'users/list/value/loading',
-      items: 'users/list/value/items',
-      serverItemsLength: 'users/list/value/items/server/items/length',
-      footerOptions: 'users/list/footer/options',
+      ready: 'stores/list/ready',
+      headers: 'stores/list/headers',
+      loading: 'stores/list/value/loading',
+      items: 'stores/list/value/items',
+      serverItemsLength: 'stores/list/value/items/server/items/length',
+      footerOptions: 'stores/list/footer/options',
     }),
     options: {
       get () {
-        return this.$store.getters['users/list/options'];
+        return this.$store.getters['stores/list/options'];
       },
       set (value) {
-        this.$store.dispatch('users/list/options', value);
+        this.$store.dispatch('stores/list/options', value);
       },
     },
   },
@@ -76,7 +75,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getList: 'users/list/get',
+      getList: 'stores/list/get',
     }),
   },
 };

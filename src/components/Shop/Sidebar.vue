@@ -77,7 +77,7 @@
           Continue to Payment
         </v-btn>
       </div>
-    </template>    
+    </template>
   </v-navigation-drawer>
 </template>
 

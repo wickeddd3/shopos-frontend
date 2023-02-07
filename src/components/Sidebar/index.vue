@@ -10,7 +10,7 @@
       <v-list-item-avatar tile>
         <img src="./../../assets/logo.png">
       </v-list-item-avatar>
-      <v-list-item-title>VueApp</v-list-item-title>
+      <v-list-item-title>s h o p o s</v-list-item-title>
       <v-btn icon @click.stop="toggleMini()">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
