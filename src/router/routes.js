@@ -53,6 +53,51 @@ export default [
         },
         component: () => import(/* webpackChunkName: "profile" */ '../pages/Profile/index.vue'),
       },
+      {
+        path: '/shop',
+        name: 'Shop',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Shop',
+        },
+        component: () => import(/* webpackChunkName: "shop" */ '../pages/Shop/index.vue'),
+      },
+      {
+        path: '/products',
+        name: 'Products',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Products',
+        },
+        component: () => import(/* webpackChunkName: "products" */ '../pages/Products/index.vue'),
+      },
+      {
+        path: '/branches',
+        name: 'Branches',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Branches',
+        },
+        component: () => import(/* webpackChunkName: "branches" */ '../pages/Branches/index.vue'),
+      },
+      {
+        path: '/stores',
+        name: 'Stores',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Stores',
+        },
+        component: () => import(/* webpackChunkName: "stores" */ '../pages/Stores/index.vue'),
+      },
+      {
+        path: '/reports',
+        name: 'Reports',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Reports',
+        },
+        component: () => import(/* webpackChunkName: "reports" */ '../pages/Reports/index.vue'),
+      },
     ],
   },
 ];
