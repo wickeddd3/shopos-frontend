@@ -14,8 +14,15 @@ export default [
     children: [],
   },
   {
+    title: 'Transactions',
+    icon: 'mdi-format-list-checkbox',
+    route: '/transactions',
+    hasSubmenu: false,
+    children: [],
+  },
+  {
     title: 'Shop',
-    icon: 'mdi-store-outline',
+    icon: 'mdi-storefront-outline',
     route: '/shop',
     hasSubmenu: false,
     children: [],
@@ -36,7 +43,7 @@ export default [
   },
   {
     title: 'Stores',
-    icon: 'mdi-storefront-outline',
+    icon: 'mdi-store-outline',
     route: '/stores',
     hasSubmenu: false,
     children: [],

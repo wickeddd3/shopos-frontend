@@ -98,6 +98,15 @@ export default [
         },
         component: () => import(/* webpackChunkName: "reports" */ '../pages/Reports/index.vue'),
       },
+      {
+        path: '/transactions',
+        name: 'Transactions',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Transactions',
+        },
+        component: () => import(/* webpackChunkName: "transactions" */ '../pages/Transactions/index.vue'),
+      },
     ],
   },
 ];
