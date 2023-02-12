@@ -3,10 +3,10 @@ export default {
     ready: false,
     headers: [
       {
-        text: 'Code',
+        text: 'SKU',
         align: 'start',
         sortable: true,
-        value: 'code',
+        value: 'sku',
       },
       {
         text: 'Name',
@@ -20,24 +20,42 @@ export default {
         sortable: true,
         value: 'category',
       },
+      {
+        text: 'Brand',
+        align: 'start',
+        sortable: true,
+        value: 'brand',
+      },
+      {
+        text: 'Tags',
+        align: 'start',
+        sortable: true,
+        value: 'tags',
+      },
     ],
     value: {
       loading: false,
       items: [
         {
-          code: 'PRODUCT001',
+          sku: 'PRODUCT001',
           name: 'Product One',
           category: 'Beverage',
+          brand: 'Brand1',
+          tags: 'Tag1',
         },
         {
-          code: 'PRODUCT002',
+          sku: 'PRODUCT002',
           name: 'Product Two',
           category: 'Beverage',
+          brand: 'Brand1',
+          tags: 'Tag1',
         },
         {
-          code: 'PRODUCT003',
+          sku: 'PRODUCT003',
           name: 'Product Three',
           category: 'Noodles',
+          brand: 'Brand2',
+          tags: 'Tag2',
         },
       ],
     },
