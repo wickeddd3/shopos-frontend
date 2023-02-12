@@ -9,6 +9,12 @@ export default {
         value: 'sku',
       },
       {
+        text: 'Barcode',
+        align: 'start',
+        sortable: true,
+        value: 'barcode',
+      },
+      {
         text: 'Name',
         align: 'start',
         sortable: true,
@@ -38,6 +44,7 @@ export default {
       items: [
         {
           sku: 'PRODUCT001',
+          barcode: '123123213',
           name: 'Product One',
           category: 'Beverage',
           brand: 'Brand1',
@@ -45,6 +52,7 @@ export default {
         },
         {
           sku: 'PRODUCT002',
+          barcode: '123123214',
           name: 'Product Two',
           category: 'Beverage',
           brand: 'Brand1',
@@ -52,6 +60,7 @@ export default {
         },
         {
           sku: 'PRODUCT003',
+          barcode: '123123215',
           name: 'Product Three',
           category: 'Noodles',
           brand: 'Brand2',

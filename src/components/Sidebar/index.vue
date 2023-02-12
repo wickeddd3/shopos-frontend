@@ -17,10 +17,36 @@
     </v-list-item>
 
     <v-list dense>
-      <template v-for="item in menu">
+      <template v-for="(item, index) in menu">
+        <v-divider
+          v-if="item.type === 'divider'"
+          :key="`${item.type}-${index}`"
+          :inset="item.inset"
+          class="my-2"
+        ></v-divider>
+        <v-subheader
+          v-else-if="item.type === 'subheader' && !mini"
+          :key="`${item.type}-${index}`"
+          :inset="item.inset"
+          class="px-4 text-uppercase"
+          v-text="item.title"
+        ></v-subheader>
+        <v-list-item
+          v-else-if="item.type === 'list-item'"
+          :key="`${item.type}-${index}`"
+          :to="item.route"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-group
-          v-if="item.hasSubmenu"
-          :key="item.title"
+          v-if="item.type === 'list-item-group'"
+          :key="`${item.type}-${index}`"
           :prepend-icon="item.icon"
         >
           <template v-slot:activator>
@@ -42,19 +68,6 @@
             </v-list-item>
           </v-list>
         </v-list-group>
-        <v-list-item
-          v-else
-          :key="item.title"
-          :to="item.route"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
       </template>
     </v-list>
   </v-navigation-drawer>
