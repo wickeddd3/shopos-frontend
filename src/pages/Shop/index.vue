@@ -16,9 +16,7 @@
             clearable
           ></v-text-field>
 
-          <v-btn
-            icon
-          >
+          <v-btn icon>
             <v-icon>mdi-format-list-bulleted-square</v-icon>
           </v-btn>
         </div>
@@ -26,7 +24,7 @@
         <div class="my-4">
           <v-row>
             <v-col v-for="(n, index) in 35" :key="n+index" cols="2">
-              <v-card>
+              <v-card link>
                 <v-img
                   height="100px"
                   src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"

@@ -23,16 +23,41 @@
       <v-list-item
         v-for="(n, index) in 4"
         :key="index"
+        class="mb-2"
       >
-        <v-list-item-content>
-          <v-list-item-title>Jin Ramen Mild</v-list-item-title>
-
-          <v-list-item-subtitle>10% discount</v-list-item-subtitle>
-        </v-list-item-content>
-
-        <v-list-item-action>
-          <v-list-item-title>$ 70.00</v-list-item-title>
-        </v-list-item-action>
+        <v-expansion-panels flat>
+          <v-expansion-panel>
+            <v-expansion-panel-header class="pa-0" hide-actions>
+              <div class="d-flex justify-space-between align-start">
+                <div class="d-flex flex-column text-truncate">
+                  <h5 class="subtitle-1 font-weight-regular text-truncate text-no-wrap">
+                    Jin Ramen Mild Original Korean
+                  </h5>
+                  <h5 class="subtitle-2 font-weight-light">
+                    10% discount
+                  </h5>
+                </div>
+                <h5 class="subtitle-1 font-weight-regular">
+                  2 x $ 70.00
+                </h5>
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-text-field
+                class="field-quantity"
+                hide-details
+                solo
+              >
+                <v-btn slot="prepend-inner" icon @click="test(0+index)">
+                  <v-icon>mdi-minus</v-icon>
+                </v-btn>
+                <v-btn slot="append" icon @click="test(1+index)">
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
+              </v-text-field>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </v-list-item>
     </v-list>
 
@@ -93,16 +118,28 @@ export default {
       show: 'shop/show',
     }),
   },
+  methods: {
+    test (test) {
+      console.log(test);
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .barcode.v-input {
   &.v-text-field.v-text-field--solo {
     & .v-input__control {
       min-height: 0px;
-      background-color: red;
     }
   }
+}
+
+.v-expansion-panel-content__wrap {
+  padding: 0px;
+}
+
+.field-quantity input {
+  text-align: center;
 }
 </style>
