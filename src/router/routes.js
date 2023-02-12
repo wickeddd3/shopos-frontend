@@ -107,6 +107,33 @@ export default [
         },
         component: () => import(/* webpackChunkName: "transactions" */ '../pages/Transactions/index.vue'),
       },
+      {
+        path: '/categories',
+        name: 'Categories',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Categories',
+        },
+        component: () => import(/* webpackChunkName: "categories" */ '../pages/Categories/index.vue'),
+      },
+      {
+        path: '/brands',
+        name: 'Brands',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Brands',
+        },
+        component: () => import(/* webpackChunkName: "brands" */ '../pages/Brands/index.vue'),
+      },
+      {
+        path: '/tags',
+        name: 'Tags',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Tags',
+        },
+        component: () => import(/* webpackChunkName: "tags" */ '../pages/Tags/index.vue'),
+      },
     ],
   },
 ];
