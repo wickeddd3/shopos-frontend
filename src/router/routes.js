@@ -134,6 +134,15 @@ export default [
         },
         component: () => import(/* webpackChunkName: "tags" */ '../pages/Tags/index.vue'),
       },
+      {
+        path: '/roles',
+        name: 'Roles',
+        meta: {
+          authOnly: true,
+          breadcrumb: 'Roles',
+        },
+        component: () => import(/* webpackChunkName: "roles" */ '../pages/Roles/index.vue'),
+      },
     ],
   },
 ];
