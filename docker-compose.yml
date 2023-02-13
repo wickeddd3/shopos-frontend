@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  #Vue2App Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8001"
+    image: shopos-app
+    container_name: shopos-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    volumes:
+      - ./:/var/www/shopos-app
+      - /var/www/shopos-app/node_modules
+    networks:
+      - shopos-network
+
+#Docker Networks
+networks:
+  shopos-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local

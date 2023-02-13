@@ -1,6 +1,6 @@
-# vue2-vuetify-app-template
+## Shopos App
 
-Vue2 App Template using Vue2 and Vuetify Framework
+POS Webapp using Vue2 and Vuetify Framework
 
 How to run locally
 - yarn install
