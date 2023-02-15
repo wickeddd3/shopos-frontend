@@ -108,10 +108,4 @@ export default [
     icon: 'mdi-account-outline',
     route: '/profile',
   },
-  {
-    type: 'list-item',
-    title: 'Log Out',
-    icon: 'mdi-logout',
-    route: '/logout',
-  },
 ];

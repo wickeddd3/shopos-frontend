@@ -1,23 +1,25 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { apiDomain } from '../../.env';
 
 export default class ResourceClient {
-  constructor ({ baseUrl = '', config = {} }) {
-    this.$http = axios.create(config);
-    this.$http.interceptors.response.use(response => {
-      const { headers: { authorization = '' } } = response;
-      const authHeader = authorization.split(/\s+/);
-      const token = authHeader.length > 1 && authHeader[1];
-      localStorage.setItem('accessToken', token);
-      return response;
-    }, error => {
+  constructor ({ url = '', config = {} }) {
+    this.$http = axios.create({
+      ...config,
+      baseURL: apiDomain,
+      withCredentials: true,
+    });
+    this.$http.interceptors.response.use(response => response, error => {
       const status = error?.response?.status || null;
       if (status === 401) {
-        console.error('got status: ', status, '. redirecting to /logout');
-        window.location = '/logout';
+        this.$http.post(`${apiDomain}/logout`);
+        Cookies.remove('AUTH');
+        Cookies.remove('XSRF-TOKEN');
+        window.location = '/login';
       }
-      return Promise.reject(error);
+      return error?.response;
     });
-    this._baseUrl = baseUrl;
+    this._url = url;
     this._defaultConfig = config;
   }
 
@@ -41,13 +43,9 @@ export default class ResourceClient {
     return this._request({ method: 'patch', data, ...config });
   }
 
-  createCancelTokenSource () {
-    return axios.CancelToken.source();
-  }
-
   _request (config = {}) {
     return this.$http({
-      url: this._baseUrl,
+      url: this._url,
       ...this._defaultConfig,
       ...config,
     });

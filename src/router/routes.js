@@ -1,5 +1,20 @@
 export default [
   {
+    path: '*',
+    name: 'NotFound',
+    meta: {
+      authOnly: true,
+    },
+    component: () => import(/* webpackChunkName: "notFound" */ '../pages/NotFound.vue'),
+  },
+  {
+    path: '/login',
+    meta: {
+      guestOnly: true,
+    },
+    component: () => import(/* webpackChunkName: "login" */ '../pages/Login/index.vue'),
+  },
+  {
     path: '/',
     meta: {
       authOnly: true,
@@ -42,16 +57,44 @@ export default [
             },
             component: () => import(/* webpackChunkName: "createUser" */ '../pages/Users/Create.vue'),
           },
+          {
+            path: ':id/edit',
+            name: 'Edit',
+            meta: {
+              authOnly: true,
+              breadcrumb: 'Edit',
+            },
+            component: () => import(/* webpackChunkName: "editUser" */ '../pages/Users/Edit.vue'),
+          },
         ],
       },
       {
-        path: '/profile',
-        name: 'Profile',
+        path: 'profile',
         meta: {
           authOnly: true,
           breadcrumb: 'Profile',
         },
-        component: () => import(/* webpackChunkName: "profile" */ '../pages/Profile/index.vue'),
+        component: {
+          render (c) { return c('router-view'); },
+        },
+        children: [
+          {
+            path: '',
+            meta: {
+              authOnly: true,
+            },
+            component: () => import(/* webpackChunkName: "profile" */ '../pages/Profile/index.vue'),
+          },
+          {
+            path: 'password',
+            name: 'Password',
+            meta: {
+              authOnly: true,
+              breadcrumb: 'Password',
+            },
+            component: () => import(/* webpackChunkName: "password" */ '../pages/Profile/Password.vue'),
+          },
+        ],
       },
       {
         path: '/shop',

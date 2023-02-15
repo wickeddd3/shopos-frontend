@@ -11,10 +11,10 @@
         <validation-observer v-slot="{ handleSubmit, invalid }" slim>
           <v-form
             ref="form"
-            @submit.prevent="handleSubmit(createUser)"
+            @submit.prevent="handleSubmit(updatePassword)"
           >
             <v-card>
-              <v-card-title class="body-1 font-weight-bold">Add New User</v-card-title>
+              <v-card-title class="body-1 font-weight-bold">Profile Password</v-card-title>
               <v-card-text class="pt-4">
                 <error-message
                   :status="status"
@@ -22,14 +22,15 @@
                 ></error-message>
                 <validation-provider
                   v-slot="{ errors }"
-                  vid="name"
-                  name="Name"
-                  rules="required|max:254"
+                  vid="currentPassword"
+                  name="Current Password"
+                  rules="required"
                 >
                   <v-text-field
-                    v-model="name"
+                    v-model="currentPassword"
                     :error-messages="errors"
-                    label="Name"
+                    label="Current Password"
+                    type="password"
                     outlined
                     dense
                   ></v-text-field>
@@ -37,14 +38,15 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  vid="email"
-                  name="Email"
-                  rules="required|email"
+                  vid="newPassword"
+                  name="New Password"
+                  rules="required"
                 >
                   <v-text-field
-                    v-model="email"
+                    v-model="newPassword"
                     :error-messages="errors"
-                    label="Email"
+                    label="New Password"
+                    type="password"
                     outlined
                     dense
                   ></v-text-field>
@@ -52,14 +54,15 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  vid="password"
-                  name="Password"
-                  rules="required|min:8"
+                  vid="passwordConfirmation"
+                  name="New Password"
+                  rules="required|confirmed:newPassword"
                 >
                   <v-text-field
-                    v-model="password"
+                    v-model="passwordConfirmation"
                     :error-messages="errors"
-                    label="Password"
+                    label="Confirm New Password"
+                    type="password"
                     outlined
                     dense
                   ></v-text-field>
@@ -68,11 +71,11 @@
               <v-divider></v-divider>
               <v-card-actions class="pa-4">
                 <v-btn
-                  to="/users"
+                  to="/profile"
                   color="primary"
                   text
                   exact
-                >Back to users</v-btn>
+                >Back to profile</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
                   :disabled="invalid"
@@ -81,7 +84,7 @@
                   type="submit"
                   class="px-4"
                 >
-                  Create user
+                  Update Password
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -98,37 +101,37 @@ import AppContent from '@/components/App/AppContent';
 import ErrorMessage from '@/components/ErrorMessage.vue';
 
 export default {
-  name: 'CreateUser',
+  name: 'Password',
   components: {
     AppContent,
     ErrorMessage,
   },
   computed: {
     ...mapGetters({
-      loading: 'users/form/loading',
-      status: 'users/form/status',
-      errors: 'users/form/errors',
+      loading: 'authentication/security/loading',
+      status: 'authentication/security/status',
+      errors: 'authentication/security/errors',
     }),
-    name: {
-      ...mapGetters({ get: 'users/form/value/name' }),
-      ...mapActions({ set: 'users/form/value/name' }),
+    currentPassword: {
+      ...mapGetters({ get: 'authentication/security/value/password/current' }),
+      ...mapActions({ set: 'authentication/security/value/password/current' }),
     },
-    email: {
-      ...mapGetters({ get: 'users/form/value/email' }),
-      ...mapActions({ set: 'users/form/value/email' }),
+    newPassword: {
+      ...mapGetters({ get: 'authentication/security/value/password' }),
+      ...mapActions({ set: 'authentication/security/value/password' }),
     },
-    password: {
-      ...mapGetters({ get: 'users/form/value/password' }),
-      ...mapActions({ set: 'users/form/value/password' }),
+    passwordConfirmation: {
+      ...mapGetters({ get: 'authentication/security/value/password/confirmation' }),
+      ...mapActions({ set: 'authentication/security/value/password/confirmation' }),
     },
   },
   destroyed () {
-    this.resetForm();
+    this.resetSecurity();
   },
   methods: {
     ...mapActions({
-      resetForm: 'users/form/reset',
-      createUser: 'users/create',
+      resetSecurity: 'authentication/security/reset',
+      updatePassword: 'authentication/security/update',
     }),
   },
 };

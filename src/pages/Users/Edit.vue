@@ -11,16 +11,20 @@
         <validation-observer v-slot="{ handleSubmit, invalid }" slim>
           <v-form
             ref="form"
-            @submit.prevent="handleSubmit(updateCurrent)"
+            @submit.prevent="handleSubmit(updateUser)"
           >
             <v-card>
-              <v-card-title class="body-1 font-weight-bold">Profile Information</v-card-title>
+              <v-card-title class="body-1 font-weight-bold">Edit User</v-card-title>
               <v-card-text class="pt-4">
+                <error-message
+                  :status="status"
+                  :errors="errors"
+                ></error-message>
                 <validation-provider
                   v-slot="{ errors }"
                   vid="name"
                   name="Name"
-                  rules="required|max:100"
+                  rules="required|max:254"
                 >
                   <v-text-field
                     v-model="name"
@@ -49,11 +53,11 @@
               <v-divider></v-divider>
               <v-card-actions class="pa-4">
                 <v-btn
-                  to="/profile/password"
+                  to="/users"
                   color="primary"
                   text
                   exact
-                >Profile Password</v-btn>
+                >Back to users</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
                   :disabled="invalid"
@@ -62,7 +66,7 @@
                   type="submit"
                   class="px-4"
                 >
-                  Save Changes
+                  Update user
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -76,36 +80,43 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import AppContent from '@/components/App/AppContent';
+import ErrorMessage from '@/components/ErrorMessage.vue';
 
 export default {
-  name: 'Profile',
+  name: 'EditUser',
   components: {
     AppContent,
+    ErrorMessage,
   },
   computed: {
     ...mapGetters({
-      loading: 'authentication/current/loading',
+      loading: 'users/form/loading',
+      status: 'users/form/status',
+      errors: 'users/form/errors',
     }),
     name: {
-      ...mapGetters({ get: 'authentication/current/value/name' }),
-      ...mapActions({ set: 'authentication/current/value/name' }),
+      ...mapGetters({ get: 'users/form/value/name' }),
+      ...mapActions({ set: 'users/form/value/name' }),
     },
     email: {
-      ...mapGetters({ get: 'authentication/current/value/email' }),
-      ...mapActions({ set: 'authentication/current/value/email' }),
+      ...mapGetters({ get: 'users/form/value/email' }),
+      ...mapActions({ set: 'users/form/value/email' }),
     },
   },
-  created () {
-    this.getCurrent();
-  },
   destroyed () {
-    this.resetCurrent();
+    this.resetForm();
+  },
+  beforeRouteEnter (to, from, next) {
+    const { params: { id } } = to;
+    next(async vm => {
+      await vm.editUser(id);
+    });
   },
   methods: {
     ...mapActions({
-      getCurrent: 'authentication/current/get',
-      resetCurrent: 'authentication/current/reset',
-      updateCurrent: 'authentication/current/update',
+      resetForm: 'users/form/reset',
+      editUser: 'users/edit',
+      updateUser: 'users/update',
     }),
   },
 };
