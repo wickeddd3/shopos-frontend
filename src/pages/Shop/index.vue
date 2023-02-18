@@ -21,6 +21,30 @@
           </v-btn>
         </div>
 
+        <div class="my-6">
+          <v-slide-group
+            multiple
+            show-arrows
+          >
+            <v-slide-item
+              v-for="n in 25"
+              :key="n"
+              v-slot="{ active, toggle }"
+            >
+              <v-btn
+                class="mx-2"
+                :input-value="active"
+                active-class="purple white--text"
+                depressed
+                rounded
+                @click="toggle"
+              >
+                Category {{ n }}
+              </v-btn>
+            </v-slide-item>
+          </v-slide-group>
+        </div>
+
         <div class="my-4">
           <v-row>
             <v-col v-for="(n, index) in 35" :key="n+index" cols="2">
