@@ -22,7 +22,7 @@
           v-if="item.type === 'divider'"
           :key="`${item.type}-${index}`"
           :inset="item.inset"
-          class="my-2"
+          class="my-2 mx-4"
         ></v-divider>
         <v-subheader
           v-else-if="item.type === 'subheader' && !mini"

@@ -18,6 +18,7 @@
               icon
               v-bind="attrs"
               v-on="on"
+              @click="addStore"
             >
               <v-icon>mdi-plus-circle-outline</v-icon>
             </v-btn>
@@ -46,6 +47,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import AppContent from '@/components/App/AppContent';
+import StoreForm from '@/components/Store/StoreForm';
 
 export default {
   name: 'Stores',
@@ -76,7 +78,14 @@ export default {
   methods: {
     ...mapActions({
       getList: 'stores/list/get',
+      setDialog: 'appdialog/set',
     }),
+    addStore () {
+      this.setDialog({
+        show: true,
+        component: StoreForm,
+      });
+    },
   },
 };
 </script>

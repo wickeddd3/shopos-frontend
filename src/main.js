@@ -4,6 +4,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+// Globally register all `App` prefixed components
+import '@/components/_globals';
+
 require('./plugins/veevalidate');
 
 Vue.config.productionTip = false;
