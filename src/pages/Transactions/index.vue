@@ -34,13 +34,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'Transactions',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       ready: 'transactions/list/ready',

@@ -45,13 +45,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'Branches',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       ready: 'branches/list/ready',

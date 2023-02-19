@@ -97,13 +97,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'Password',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       loading: 'authentication/security/loading',

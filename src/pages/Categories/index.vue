@@ -49,12 +49,7 @@
 </template>
 
 <script>
-import AppContent from '@/components/App/AppContent';
-
 export default {
   name: 'Categories',
-  components: {
-    AppContent,
-  },
 };
 </script>

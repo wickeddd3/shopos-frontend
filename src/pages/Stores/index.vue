@@ -46,14 +46,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 import StoreForm from '@/components/Store/StoreForm';
 
 export default {
   name: 'Stores',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       ready: 'stores/list/ready',

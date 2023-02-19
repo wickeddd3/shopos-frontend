@@ -45,13 +45,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'Roles',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       ready: 'roles/list/ready',

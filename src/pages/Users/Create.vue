@@ -94,13 +94,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'CreateUser',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       loading: 'users/form/loading',

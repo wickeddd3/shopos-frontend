@@ -79,13 +79,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'EditUser',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       loading: 'users/form/loading',

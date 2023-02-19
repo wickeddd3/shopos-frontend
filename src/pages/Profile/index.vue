@@ -75,13 +75,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'Profile',
-  components: {
-    AppContent,
-  },
   computed: {
     ...mapGetters({
       loading: 'authentication/current/loading',

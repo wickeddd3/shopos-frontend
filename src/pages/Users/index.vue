@@ -114,7 +114,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { debounce } from 'lodash';
-import AppContent from '@/components/App/AppContent';
 
 export default {
   name: 'Users',
@@ -122,9 +121,6 @@ export default {
     return {
       searchQuery: null,
     };
-  },
-  components: {
-    AppContent,
   },
   computed: {
     ...mapGetters({

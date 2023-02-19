@@ -49,12 +49,7 @@
 </template>
 
 <script>
-import AppContent from '@/components/App/AppContent';
-
 export default {
   name: 'Tags',
-  components: {
-    AppContent,
-  },
 };
 </script>
