@@ -3,12 +3,14 @@
     <v-row justify="space-between" class="mb-4">
       <v-col cols="auto">
         <v-text-field
+          v-model="searchQuery"
           label="Search..."
           prepend-inner-icon="mdi-magnify"
+          hide-details
           clearable
           solo
           dense
-          hide-details
+          @input="search"
         ></v-text-field>
       </v-col>
       <v-col cols="auto">
@@ -32,7 +34,7 @@
       :headers="headers"
       :items="items"
       :options.sync="options"
-      :server-items-length="serverItemsLength"
+      :server-items-length="total"
       :footer-props="footerOptions"
       :loading="loading"
       class="elevation-1"
@@ -46,18 +48,24 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { debounce } from 'lodash';
 import StoreForm from '@/components/Store/StoreForm';
 
 export default {
   name: 'Stores',
+  data () {
+    return {
+      searchQuery: null,
+    };
+  },
   computed: {
     ...mapGetters({
       ready: 'stores/list/ready',
+      loading: 'stores/list/loading',
       headers: 'stores/list/headers',
-      loading: 'stores/list/value/loading',
       items: 'stores/list/value/items',
-      serverItemsLength: 'stores/list/value/items/server/items/length',
-      footerOptions: 'stores/list/footer/options',
+      total: 'stores/list/value/items/total',
+      footerOptions: 'stores/list/options/footer',
     }),
     options: {
       get () {
@@ -71,11 +79,18 @@ export default {
   created () {
     this.getList();
   },
+  destroyed () {
+    this.resetList();
+  },
   methods: {
     ...mapActions({
       getList: 'stores/list/get',
+      resetList: 'stores/list/reset',
       setDialog: 'appdialog/set',
     }),
+    search: debounce(function () {
+      this.getList({ query: this.searchQuery });
+    }, 500),
     addStore () {
       this.setDialog({
         show: true,

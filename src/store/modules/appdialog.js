@@ -19,6 +19,11 @@ const mutations = {
 const actions = {
   close: ({ commit }) => commit('DIALOG/SET', { show: false }),
   set: ({ commit }, dialog) => commit('DIALOG/SET', dialog),
+  reset: ({ commit }) => commit('DIALOG/SET', {
+    show: false,
+    maxwidth: '600px',
+    component: null,
+  }),
 };
 
 export default {

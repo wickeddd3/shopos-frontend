@@ -1,6 +1,7 @@
 export default {
   list: {
     ready: false,
+    loading: false,
     headers: [
       {
         text: 'Code',
@@ -15,23 +16,7 @@ export default {
         value: 'name',
       },
     ],
-    value: {
-      loading: false,
-      items: [
-        {
-          code: 'STORE001',
-          name: 'Store One',
-        },
-        {
-          code: 'STORE002',
-          name: 'Store Two',
-        },
-        {
-          code: 'STORE003',
-          name: 'Store Three',
-        },
-      ],
-    },
+    value: null,
     options: {
       itemsPerPage: 10,
       page: 1,
@@ -40,5 +25,15 @@ export default {
     footerOptions: {
       'items-per-page-options': [ 10, 20, 30, 40, 50 ],
     },
+  },
+  form: {
+    value: {
+      code: null,
+      name: null,
+      description: null,
+    },
+    loading: false,
+    errors: {},
+    status: null,
   },
 };
