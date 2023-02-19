@@ -17,10 +17,10 @@
           @submit.prevent="handleSubmit(login)"
         >
           <h1 class="my-4">Login</h1>
-          <error-message
+          <app-error-message
             :status="status"
             :errors="errors"
-          ></error-message>
+          ></app-error-message>
           <validation-provider
             v-slot="{ errors }"
             vid="email"
@@ -71,11 +71,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import ErrorMessage from '@/components/ErrorMessage.vue';
 
 export default {
   name: 'Login',
-  components: { ErrorMessage },
   data () {
     return {
       show: false,

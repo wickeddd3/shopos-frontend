@@ -29,7 +29,7 @@
 import { startCase } from 'lodash';
 
 export default {
-  name: 'ErrorMessage',
+  name: 'AppErrorMessage',
   props: {
     errors: {
       type: Object,

@@ -16,10 +16,10 @@
             <v-card>
               <v-card-title class="body-1 font-weight-bold">Add New User</v-card-title>
               <v-card-text class="pt-4">
-                <error-message
+                <app-error-message
                   :status="status"
                   :errors="errors"
-                ></error-message>
+                ></app-error-message>
                 <validation-provider
                   v-slot="{ errors }"
                   vid="name"
@@ -95,13 +95,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import AppContent from '@/components/App/AppContent';
-import ErrorMessage from '@/components/ErrorMessage.vue';
 
 export default {
   name: 'CreateUser',
   components: {
     AppContent,
-    ErrorMessage,
   },
   computed: {
     ...mapGetters({
