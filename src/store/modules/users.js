@@ -82,7 +82,7 @@ const actions = {
     commit('FORM/SET', { status, errors: (data.errors || {}), loading: false });
     if (status === 201) {
       router.push({ path: '/users' });
-      dispatch('snackbar/set', { show: true, text: 'User has been successfully added.' }, { root: true });
+      dispatch('appsnackbar/set', { show: true, text: 'User has been successfully added.' }, { root: true });
     }
   },
   edit: async ({ commit }, id) => {
@@ -97,7 +97,7 @@ const actions = {
     commit('FORM/SET', { status, errors: (data.errors || {}), loading: false });
     if (status === 200) {
       router.push({ path: '/users' });
-      dispatch('snackbar/set', { show: true, text: 'User has been successfully updated.' }, { root: true });
+      dispatch('appsnackbar/set', { show: true, text: 'User has been successfully updated.' }, { root: true });
     }
   },
   delete: async ({ getters, dispatch }, id) => {
@@ -105,7 +105,7 @@ const actions = {
     if (status === 200) {
       const options = getters['list/options'];
       dispatch('list/get', options);
-      dispatch('snackbar/set', { show: true, text: 'User has been successfully deleted.' }, { root: true });
+      dispatch('appsnackbar/set', { show: true, text: 'User has been successfully deleted.' }, { root: true });
     }
   },
   template: async () => {
@@ -133,7 +133,7 @@ const actions = {
     if (status === 200) {
       const options = getters['list/options'];
       dispatch('list/get', options);
-      dispatch('snackbar/set', { show: true, text: 'Users has been successfully uploaded.' }, { root: true });
+      dispatch('appsnackbar/set', { show: true, text: 'Users has been successfully uploaded.' }, { root: true });
     }
   },
 };

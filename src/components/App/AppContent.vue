@@ -8,7 +8,11 @@
         class="app-content px-8"
         fluid
       >
-        <snackbar></snackbar>
+        <app-snackbar
+          :show="snackbarShow"
+          :text="snackbarText"
+          @close="closeSnackbar"
+        ></app-snackbar>
         <breadcrumbs></breadcrumbs>
         <slot></slot>
         <app-dialog
@@ -28,8 +32,6 @@ import { mapGetters, mapActions } from 'vuex';
 import Appbar from '@/components/Appbar/index.vue';
 import Sidebar from '@/components/Sidebar/index.vue';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import Snackbar from '@/components/Snackbar';
-import AppDialog from '@/components/App/AppDialog';
 
 export default {
   name: 'AppContent',
@@ -37,11 +39,11 @@ export default {
     Appbar,
     Sidebar,
     Breadcrumbs,
-    Snackbar,
-    AppDialog,
   },
   computed: {
     ...mapGetters({
+      snackbarText: 'appsnackbar/text',
+      snackbarShow: 'appsnackbar/show',
       dialogShow: 'appdialog/show',
       dialogComponent: 'appdialog/component',
       dialogMaxwidth: 'appdialog/maxwidth',
@@ -49,6 +51,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      closeSnackbar: 'appsnackbar/close',
       closeDialog: 'appdialog/close',
     }),
   },

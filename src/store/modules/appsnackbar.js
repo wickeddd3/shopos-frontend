@@ -15,7 +15,7 @@ const mutations = {
 };
 
 const actions = {
-  show: ({ commit }, show) => commit('SNACKBAR/SET', { show }),
+  close: ({ commit }) => commit('SNACKBAR/SET', { show: false }),
   set: ({ commit }, snackbar) => commit('SNACKBAR/SET', snackbar),
 };
 

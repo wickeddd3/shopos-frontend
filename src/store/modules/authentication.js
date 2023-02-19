@@ -97,7 +97,7 @@ const actions = {
     const { status } = await resource.current().update(form);
     commit('CURRENT/SET', { loading: false });
     if (status === 200) {
-      dispatch('snackbar/set', { show: true, text: 'Profile has been successfully updated.' }, { root: true });
+      dispatch('appsnackbar/set', { show: true, text: 'Profile has been successfully updated.' }, { root: true });
     }
   },
   'security/value/password': ({ commit }, password) => commit('SECURITY/VALUE/SET', { password }),
@@ -121,7 +121,7 @@ const actions = {
     const { status, data } = await resource.current().updatePassword(security);
     commit('SECURITY/SET', { status, errors: (data?.errors || {}), loading: false });
     if (status === 200) {
-      dispatch('snackbar/set', { show: true, text: 'Password has been successfully updated.' }, { root: true });
+      dispatch('appsnackbar/set', { show: true, text: 'Password has been successfully updated.' }, { root: true });
     }
   },
 };
