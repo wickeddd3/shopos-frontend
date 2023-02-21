@@ -1,6 +1,6 @@
 <template>
   <app-dialog-content
-    title="Add Store"
+    :title="title"
     @cancel="$emit('cancel')"
     @close="$emit('close')"
     @submit="submitForm"
@@ -52,6 +52,7 @@ export default {
       loading: 'stores/form/loading',
       status: 'stores/form/status',
       errors: 'stores/form/errors',
+      title: 'stores/form/title',
     }),
     code: {
       ...mapGetters({ get: 'stores/form/value/code' }),
