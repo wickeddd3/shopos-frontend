@@ -1,5 +1,6 @@
 import initialState from '@/config/stores.state.js';
 import StoreResource from '@/api/store/StoreResource';
+import StoreForm from '@/components/Store/StoreForm';
 
 const resource = new StoreResource();
 
@@ -74,6 +75,27 @@ const actions = {
       status: null,
     });
   },
+  'form/submit': async ({ getters, dispatch }) => {
+    const { id } = getters['form/value'];
+    if (id) {
+      await dispatch('update');
+      return;
+    }
+    await dispatch('create');
+  },
+  add: ({ dispatch }) => {
+    dispatch('appdialog/set', {
+      show: true,
+      component: StoreForm,
+    }, { root: true });
+  },
+  edit: ({ commit, dispatch }, item) => {
+    commit('FORM/VALUE/SET', item);
+    dispatch('appdialog/set', {
+      show: true,
+      component: StoreForm,
+    }, { root: true });
+  },
   create: async ({ commit, getters, dispatch }) => {
     commit('FORM/SET', { loading: true });
     const form = getters['form/value'];
@@ -81,6 +103,17 @@ const actions = {
     commit('FORM/SET', { status, errors: (data.errors || {}), loading: false });
     if (status === 201) {
       await dispatch('appsnackbar/set', { show: true, text: 'Store has been successfully added.' }, { root: true });
+      await dispatch('appdialog/reset', {}, { root: true });
+      await dispatch('list/get');
+    }
+  },
+  update: async ({ commit, getters, dispatch }) => {
+    commit('FORM/SET', { loading: true });
+    const form = getters['form/value'];
+    const { status, data } = await resource.update(form.id, form);
+    commit('FORM/SET', { status, errors: (data.errors || {}), loading: false });
+    if (status === 200) {
+      await dispatch('appsnackbar/set', { show: true, text: 'Store has been successfully updated.' }, { root: true });
       await dispatch('appdialog/reset', {}, { root: true });
       await dispatch('list/get');
     }

@@ -15,6 +15,12 @@ export default {
         sortable: true,
         value: 'name',
       },
+      {
+        text: '',
+        align: 'center',
+        sortable: false,
+        value: 'options',
+      },
     ],
     value: null,
     options: {

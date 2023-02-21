@@ -38,7 +38,16 @@
       :footer-props="footerOptions"
       :loading="loading"
       class="elevation-1"
-    ></v-data-table>
+    >
+      <template v-slot:item.options="{ item }">
+        <v-btn icon @click="editStore(item)">
+          <v-icon small>mdi-pencil</v-icon>
+        </v-btn>
+      </template>
+      <template v-slot:no-data>
+        No data
+      </template>
+    </v-data-table>
     <v-skeleton-loader
       v-else
       type="table"
@@ -49,7 +58,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { debounce } from 'lodash';
-import StoreForm from '@/components/Store/StoreForm';
 
 export default {
   name: 'Stores',
@@ -86,17 +94,12 @@ export default {
     ...mapActions({
       getList: 'stores/list/get',
       resetList: 'stores/list/reset',
-      setDialog: 'appdialog/set',
+      addStore: 'stores/add',
+      editStore: 'stores/edit',
     }),
     search: debounce(function () {
       this.getList({ query: this.searchQuery });
     }, 500),
-    addStore () {
-      this.setDialog({
-        show: true,
-        component: StoreForm,
-      });
-    },
   },
 };
 </script>

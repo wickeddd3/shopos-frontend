@@ -17,7 +17,7 @@ const mutations = {
 };
 
 const actions = {
-  close: ({ commit }) => commit('DIALOG/SET', { show: false }),
+  close: ({ commit }) => commit('DIALOG/SET', { show: false, component: null }),
   set: ({ commit }, dialog) => commit('DIALOG/SET', dialog),
   reset: ({ commit }) => commit('DIALOG/SET', {
     show: false,

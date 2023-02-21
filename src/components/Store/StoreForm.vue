@@ -3,7 +3,7 @@
     title="Add Store"
     @cancel="$emit('cancel')"
     @close="$emit('close')"
-    @submit="createStore"
+    @submit="submitForm"
   >
     <template v-slot:default>
       <v-container>
@@ -72,7 +72,7 @@ export default {
   methods: {
     ...mapActions({
       resetForm: 'stores/form/reset',
-      createStore: 'stores/create',
+      submitForm: 'stores/form/submit',
     }),
   },
 };
