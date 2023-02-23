@@ -20,7 +20,7 @@
               icon
               v-bind="attrs"
               v-on="on"
-              @click="addStore"
+              @click="add"
             >
               <v-icon>mdi-plus-circle-outline</v-icon>
             </v-btn>
@@ -40,7 +40,7 @@
       class="elevation-1"
     >
       <template v-slot:item.options="{ item }">
-        <v-btn icon @click="editStore(item)">
+        <v-btn icon @click="edit(item)">
           <v-icon small>mdi-pencil</v-icon>
         </v-btn>
       </template>
@@ -94,8 +94,8 @@ export default {
     ...mapActions({
       getList: 'stores/list/get',
       resetList: 'stores/list/reset',
-      addStore: 'stores/add',
-      editStore: 'stores/edit',
+      add: 'stores/add',
+      edit: 'stores/edit',
     }),
     search: debounce(function () {
       this.getList({ query: this.searchQuery });
