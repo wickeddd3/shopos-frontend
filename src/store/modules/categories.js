@@ -1,8 +1,8 @@
-import initialState from '@/config/stores.state.js';
-import BranchResource from '@/api/branch/BranchResource';
-import BranchForm from '@/components/Branch/BranchForm';
+import initialState from '@/config/categories.state.js';
+import CategoryResource from '@/api/category/CategoryResource';
+import CategoryForm from '@/components/Category/CategoryForm';
 
-const resource = new BranchResource();
+const resource = new CategoryResource();
 
 const state = {
   ...initialState,
@@ -19,10 +19,9 @@ const getters = {
   'form/loading': ({ form: { loading } }) => loading,
   'form/errors': ({ form: { errors } }) => errors,
   'form/status': ({ form: { status } }) => status,
-  'form/title': (state, getters) => (getters['form/value/id'] ? 'Edit Branch' : 'Add Branch'),
+  'form/title': (state, getters) => (getters['form/value/id'] ? 'Edit Category' : 'Add Category'),
   'form/value': ({ form: { value } }) => value,
   'form/value/id': ({ form: { value } }) => value?.id,
-  'form/value/store': ({ form: { value } }) => value?.store_id,
   'form/value/code': ({ form: { value: { code } } }) => code,
   'form/value/name': ({ form: { value: { name } } }) => name,
   'form/value/description': ({ form: { value: { description } } }) => description,
@@ -63,14 +62,12 @@ const actions = {
     commit('LIST/SET', { loading: false });
   },
   'list/reset': ({ commit }) => commit('LIST/SET', { value: null, ready: false }),
-  'form/value/store': ({ commit }, storeId) => commit('FORM/VALUE/SET', { store_id: storeId }),
   'form/value/code': ({ commit }, code) => commit('FORM/VALUE/SET', { code }),
   'form/value/name': ({ commit }, name) => commit('FORM/VALUE/SET', { name }),
   'form/value/description': ({ commit }, description) => commit('FORM/VALUE/SET', { description }),
   'form/reset': ({ commit }) => {
     commit('FORM/SET', {
       value: {
-        store: null,
         code: null,
         name: null,
         description: null,
@@ -91,14 +88,14 @@ const actions = {
   add: ({ dispatch }) => {
     dispatch('appdialog/set', {
       show: true,
-      component: BranchForm,
+      component: CategoryForm,
     }, { root: true });
   },
   edit: ({ commit, dispatch }, item) => {
     commit('FORM/VALUE/SET', item);
     dispatch('appdialog/set', {
       show: true,
-      component: BranchForm,
+      component: CategoryForm,
     }, { root: true });
   },
   create: async ({ commit, getters, dispatch }) => {
@@ -107,7 +104,7 @@ const actions = {
     const { status, data } = await resource.create(form);
     commit('FORM/SET', { status, errors: (data.errors || {}), loading: false });
     if (status === 201) {
-      await dispatch('appsnackbar/set', { show: true, text: 'Branch has been successfully added.' }, { root: true });
+      await dispatch('appsnackbar/set', { show: true, text: 'Category has been successfully added.' }, { root: true });
       await dispatch('appdialog/reset', {}, { root: true });
       await dispatch('list/get');
     }
@@ -118,7 +115,7 @@ const actions = {
     const { status, data } = await resource.update(form.id, form);
     commit('FORM/SET', { status, errors: (data.errors || {}), loading: false });
     if (status === 200) {
-      await dispatch('appsnackbar/set', { show: true, text: 'Branch has been successfully updated.' }, { root: true });
+      await dispatch('appsnackbar/set', { show: true, text: 'Category has been successfully updated.' }, { root: true });
       await dispatch('appdialog/reset', {}, { root: true });
       await dispatch('list/get');
     }
