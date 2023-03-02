@@ -1,7 +1,20 @@
 export default {
   list: {
     ready: false,
+    loading: false,
     headers: [
+      {
+        text: 'Branch',
+        align: 'start',
+        sortable: true,
+        value: 'branch.name',
+      },
+      {
+        text: 'Code',
+        align: 'start',
+        sortable: true,
+        value: 'code',
+      },
       {
         text: 'SKU',
         align: 'start',
@@ -24,50 +37,28 @@ export default {
         text: 'Category',
         align: 'start',
         sortable: true,
-        value: 'category',
+        value: 'category.name',
       },
       {
         text: 'Brand',
         align: 'start',
         sortable: true,
-        value: 'brand',
+        value: 'brand.name',
       },
+      // {
+      //   text: 'Tags',
+      //   align: 'start',
+      //   sortable: true,
+      //   value: 'tags',
+      // },
       {
-        text: 'Tags',
-        align: 'start',
-        sortable: true,
-        value: 'tags',
+        text: '',
+        align: 'center',
+        sortable: false,
+        value: 'options',
       },
     ],
-    value: {
-      loading: false,
-      items: [
-        {
-          sku: 'PRODUCT001',
-          barcode: '123123213',
-          name: 'Product One',
-          category: 'Beverage',
-          brand: 'Brand1',
-          tags: 'Tag1',
-        },
-        {
-          sku: 'PRODUCT002',
-          barcode: '123123214',
-          name: 'Product Two',
-          category: 'Beverage',
-          brand: 'Brand1',
-          tags: 'Tag1',
-        },
-        {
-          sku: 'PRODUCT003',
-          barcode: '123123215',
-          name: 'Product Three',
-          category: 'Noodles',
-          brand: 'Brand2',
-          tags: 'Tag2',
-        },
-      ],
-    },
+    value: null,
     options: {
       itemsPerPage: 10,
       page: 1,
@@ -76,5 +67,20 @@ export default {
     footerOptions: {
       'items-per-page-options': [ 10, 20, 30, 40, 50 ],
     },
+  },
+  form: {
+    value: {
+      branch_id: null,
+      category_id: null,
+      brand_id: null,
+      code: null,
+      sku: null,
+      barcode: null,
+      name: null,
+      description: null,
+    },
+    loading: false,
+    errors: {},
+    status: null,
   },
 };

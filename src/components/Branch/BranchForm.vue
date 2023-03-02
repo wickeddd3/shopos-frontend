@@ -19,7 +19,7 @@
           <v-autocomplete
             v-model="store"
             :error-messages="errors"
-            :loading="storeListloading"
+            :loading="storeListLoading"
             :items="storeListItems"
             label="Store"
             item-text="name"
@@ -73,7 +73,7 @@ export default {
       status: 'branches/form/status',
       errors: 'branches/form/errors',
       title: 'branches/form/title',
-      storeListloading: 'stores/list/loading',
+      storeListLoading: 'stores/list/loading',
       storeListItems: 'stores/list/value/items',
     }),
     store: {

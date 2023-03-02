@@ -70,7 +70,7 @@ const actions = {
   'form/reset': ({ commit }) => {
     commit('FORM/SET', {
       value: {
-        store: null,
+        store_id: null,
         code: null,
         name: null,
         description: null,

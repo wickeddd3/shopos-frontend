@@ -3,12 +3,14 @@
     <v-row justify="space-between" class="mb-4">
       <v-col cols="auto">
         <v-text-field
+          v-model="searchQuery"
           label="Search..."
           prepend-inner-icon="mdi-magnify"
+          hide-details
           clearable
           solo
           dense
-          hide-details
+          @input="search"
         ></v-text-field>
       </v-col>
       <v-col cols="auto">
@@ -18,6 +20,7 @@
               icon
               v-bind="attrs"
               v-on="on"
+              @click="add"
             >
               <v-icon>mdi-plus-circle-outline</v-icon>
             </v-btn>
@@ -31,11 +34,20 @@
       :headers="headers"
       :items="items"
       :options.sync="options"
-      :server-items-length="serverItemsLength"
+      :server-items-length="total"
       :footer-props="footerOptions"
       :loading="loading"
       class="elevation-1"
-    ></v-data-table>
+    >
+      <template v-slot:item.options="{ item }">
+        <v-btn icon @click="edit(item)">
+          <v-icon small>mdi-pencil</v-icon>
+        </v-btn>
+      </template>
+      <template v-slot:no-data>
+        No data
+      </template>
+    </v-data-table>
     <v-skeleton-loader
       v-else
       type="table"
@@ -45,17 +57,23 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { debounce } from 'lodash';
 
 export default {
   name: 'Products',
+  data () {
+    return {
+      searchQuery: null,
+    };
+  },
   computed: {
     ...mapGetters({
       ready: 'products/list/ready',
+      loading: 'products/list/loading',
       headers: 'products/list/headers',
-      loading: 'products/list/value/loading',
       items: 'products/list/value/items',
-      serverItemsLength: 'products/list/value/items/server/items/length',
-      footerOptions: 'products/list/footer/options',
+      total: 'products/list/value/items/total',
+      footerOptions: 'products/list/options/footer',
     }),
     options: {
       get () {
@@ -69,10 +87,19 @@ export default {
   created () {
     this.getList();
   },
+  destroyed () {
+    this.resetList();
+  },
   methods: {
     ...mapActions({
       getList: 'products/list/get',
+      resetList: 'products/list/reset',
+      add: 'products/add',
+      edit: 'products/edit',
     }),
+    search: debounce(function () {
+      this.getList({ query: this.searchQuery });
+    }, 500),
   },
 };
 </script>
