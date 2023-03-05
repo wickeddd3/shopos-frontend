@@ -45,6 +45,12 @@ export default {
         sortable: true,
         value: 'brand.name',
       },
+      {
+        text: 'Price',
+        align: 'right',
+        sortable: true,
+        value: 'price',
+      },
       // {
       //   text: 'Tags',
       //   align: 'start',
@@ -78,6 +84,7 @@ export default {
       barcode: null,
       name: null,
       description: null,
+      price: null,
     },
     loading: false,
     errors: {},

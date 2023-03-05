@@ -30,6 +30,7 @@ const getters = {
   'form/value/barcode': ({ form: { value: { barcode } } }) => barcode,
   'form/value/name': ({ form: { value: { name } } }) => name,
   'form/value/description': ({ form: { value: { description } } }) => description,
+  'form/value/price': ({ form: { value: { price } } }) => price,
 };
 
 const mutations = {
@@ -75,6 +76,7 @@ const actions = {
   'form/value/barcode': ({ commit }, barcode) => commit('FORM/VALUE/SET', { barcode }),
   'form/value/name': ({ commit }, name) => commit('FORM/VALUE/SET', { name }),
   'form/value/description': ({ commit }, description) => commit('FORM/VALUE/SET', { description }),
+  'form/value/price': ({ commit }, price) => commit('FORM/VALUE/SET', { price }),
   'form/reset': ({ commit }) => {
     commit('FORM/SET', {
       value: {

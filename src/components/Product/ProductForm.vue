@@ -123,6 +123,20 @@
             dense
           ></v-text-field>
         </validation-provider>
+        <validation-provider
+          v-slot="{ errors }"
+          vid="price"
+          name="Price"
+        >
+          <v-text-field
+            v-model.number="price"
+            :error-messages="errors"
+            label="Price"
+            type="number"
+            outlined
+            dense
+          ></v-text-field>
+        </validation-provider>
       </v-container>
     </template>
   </app-dialog-content>
@@ -177,6 +191,10 @@ export default {
     description: {
       ...mapGetters({ get: 'products/form/value/description' }),
       ...mapActions({ set: 'products/form/value/description' }),
+    },
+    price: {
+      ...mapGetters({ get: 'products/form/value/price' }),
+      ...mapActions({ set: 'products/form/value/price' }),
     },
   },
   created () {

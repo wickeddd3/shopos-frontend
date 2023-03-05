@@ -2,6 +2,8 @@
   <v-dialog
     :value="show"
     :max-width="maxWidth"
+    :transition="transition"
+    :fullscreen="fullscreen"
     persistent
   >
     <component
@@ -27,6 +29,14 @@ export default {
     maxWidth: {
       type: [ String, Number ],
       default: '600px',
+    },
+    transition: {
+      type: String,
+      default: 'scale-transition',
+    },
+    fullscreen: {
+      type: Boolean,
+      default: false,
     },
   },
 };

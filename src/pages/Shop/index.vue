@@ -27,19 +27,20 @@
             show-arrows
           >
             <v-slide-item
-              v-for="n in 25"
-              :key="n"
+              v-for="item in categoryItems"
+              :key="item.id"
               v-slot="{ active, toggle }"
             >
               <v-btn
                 class="mx-2"
                 :input-value="active"
-                active-class="purple white--text"
+                active-class="primary white--text"
                 depressed
                 rounded
+                small
                 @click="toggle"
               >
-                Category {{ n }}
+                {{ item.name }}
               </v-btn>
             </v-slide-item>
           </v-slide-group>
@@ -47,15 +48,15 @@
 
         <div class="my-4">
           <v-row>
-            <v-col v-for="(n, index) in 35" :key="n+index" cols="2">
-              <v-card link>
+            <v-col v-for="item in productItems" :key="item.id" cols="2">
+              <v-card link @click="addToCart(item)">
                 <v-img
                   height="100px"
                   src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
                 ></v-img>
                 <v-card-actions class="d-flex flex-column align-start">
-                  <span class="subtitle-2 font-weight-light">Jin Ramen Spicy</span>
-                  <span class="subtitle-2">$75</span>
+                  <span class="subtitle-2 font-weight-light">{{ item.name }}</span>
+                  <span class="subtitle-2">{{ `$ ${item.price}` }}</span>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -95,10 +96,25 @@
         </v-btn>
       </v-bottom-navigation>
     </v-main>
+    <app-snackbar
+      :show="snackbarShow"
+      :text="snackbarText"
+      @close="closeSnackbar"
+    ></app-snackbar>
+    <app-dialog
+      :show="dialogShow"
+      :component="dialogComponent"
+      :max-width="dialogMaxwidth"
+      :fullscreen="true"
+      transition="dialog-bottom-transition"
+      @cancel="closeDialog"
+      @close="closeDialog"
+    ></app-dialog>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import ShopAppbar from '@/components/Shop/Appbar';
 import ShopSidebar from '@/components/Shop/Sidebar';
 
@@ -107,6 +123,43 @@ export default {
   components: {
     ShopAppbar,
     ShopSidebar,
+  },
+  computed: {
+    ...mapGetters({
+      snackbarText: 'appsnackbar/text',
+      snackbarShow: 'appsnackbar/show',
+      dialogShow: 'appdialog/show',
+      dialogComponent: 'appdialog/component',
+      dialogMaxwidth: 'appdialog/maxwidth',
+      productReady: 'products/list/ready',
+      productLoading: 'products/list/loading',
+      productItems: 'products/list/value/items',
+      categoryReady: 'categories/list/ready',
+      categoryItems: 'categories/list/value/items',
+    }),
+  },
+  created () {
+    Promise.all([
+      this.getProductList(),
+      this.getCategoryList(),
+    ]);
+  },
+  destroyed () {
+    Promise.all([
+      this.resetProductList(),
+      this.resetCategoryList(),
+    ]);
+  },
+  methods: {
+    ...mapActions({
+      getProductList: 'products/list/get',
+      getCategoryList: 'categories/list/get',
+      resetProductList: 'products/list/reset',
+      resetCategoryList: 'categories/list/reset',
+      addToCart: 'cart/value/items/add',
+      closeSnackbar: 'appsnackbar/close',
+      closeDialog: 'appdialog/close',
+    }),
   },
 };
 </script>
