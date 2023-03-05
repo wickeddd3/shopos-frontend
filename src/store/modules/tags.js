@@ -1,4 +1,4 @@
-import initialState from '@/config/categories.state.js';
+import initialState from '@/config/tags.state.js';
 import TagResource from '@/api/tag/TagResource';
 import TagForm from '@/components/Tag/TagForm';
 

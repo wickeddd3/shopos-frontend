@@ -3,12 +3,14 @@
     <v-row justify="space-between" class="mb-4">
       <v-col cols="auto">
         <v-text-field
+          v-model="searchQuery"
           label="Search..."
           prepend-inner-icon="mdi-magnify"
+          hide-details
           clearable
           solo
           dense
-          hide-details
+          @input="search"
         ></v-text-field>
       </v-col>
       <v-col cols="auto">
@@ -20,7 +22,7 @@
       :headers="headers"
       :items="items"
       :options.sync="options"
-      :server-items-length="serverItemsLength"
+      :server-items-length="total"
       :footer-props="footerOptions"
       :loading="loading"
       class="elevation-1"
@@ -34,17 +36,23 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { debounce } from 'lodash';
 
 export default {
   name: 'Transactions',
+  data () {
+    return {
+      searchQuery: null,
+    };
+  },
   computed: {
     ...mapGetters({
       ready: 'transactions/list/ready',
+      loading: 'transactions/list/loading',
       headers: 'transactions/list/headers',
-      loading: 'transactions/list/value/loading',
       items: 'transactions/list/value/items',
-      serverItemsLength: 'transactions/list/value/items/server/items/length',
-      footerOptions: 'transactions/list/footer/options',
+      total: 'transactions/list/value/items/total',
+      footerOptions: 'transactions/list/options/footer',
     }),
     options: {
       get () {
@@ -58,10 +66,17 @@ export default {
   created () {
     this.getList();
   },
+  destroyed () {
+    this.resetList();
+  },
   methods: {
     ...mapActions({
       getList: 'transactions/list/get',
+      resetList: 'transactions/list/reset',
     }),
+    search: debounce(function () {
+      this.getList({ query: this.searchQuery });
+    }, 500),
   },
 };
 </script>

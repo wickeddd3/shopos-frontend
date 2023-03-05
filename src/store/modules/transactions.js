@@ -1,4 +1,7 @@
 import initialState from '@/config/transactions.state.js';
+import OrderResource from '@/api/shop/OrderResource';
+
+const resource = new OrderResource();
 
 const state = {
   ...initialState,
@@ -6,12 +9,12 @@ const state = {
 
 const getters = {
   'list/ready': ({ list: { ready } }) => ready,
+  'list/loading': ({ list: { loading } }) => loading,
   'list/headers': ({ list: { headers } }) => headers,
   'list/options': ({ list: { options } }) => options,
-  'list/footer/options': ({ list: { footerOptions } }) => footerOptions,
-  'list/value/loading': ({ list: { value: { loading } } }) => loading,
-  'list/value/items': ({ list: { value: { items } } }) => items,
-  'list/value/items/server/items/length': ({ list: { value: { items } } }) => items.length,
+  'list/options/footer': ({ list: { footerOptions } }) => footerOptions,
+  'list/value/items': ({ list: { value } }) => value?.data,
+  'list/value/items/total': ({ list: { value } }) => value?.total,
 };
 
 const mutations = {
@@ -20,11 +23,14 @@ const mutations = {
 };
 
 const actions = {
-  'list/get': ({ commit }) => {
-    commit('LIST/SET', { ready: true });
+  'list/get': async ({ commit }, params) => {
+    const { data } = await resource.list(params);
+    commit('LIST/SET', { value: data, ready: true });
   },
-  'list/options': ({ commit, dispatch }, options) => {
+  'list/options': async ({ commit, dispatch }, options) => {
+    commit('LIST/SET', { loading: true });
     commit('LIST/OPTIONS/SET', options);
+
     const {
       itemsPerPage, page, sortBy, sortDesc,
     } = options;
@@ -38,9 +44,12 @@ const actions = {
       direction = 'asc';
     }
 
-    const sortValue = [ sort, direction ].filter(value => value).join(',');
-    dispatch('list/get', { page: page - 1, sort: sortValue, size: itemsPerPage });
+    await dispatch('list/get', {
+      page, sort, direction, per_page: itemsPerPage,
+    });
+    commit('LIST/SET', { loading: false });
   },
+  'list/reset': ({ commit }) => commit('LIST/SET', { value: null, ready: false }),
 };
 
 export default {

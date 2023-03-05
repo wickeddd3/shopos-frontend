@@ -1,24 +1,13 @@
 export default {
   list: {
     ready: false,
+    loading: false,
     headers: [
-      {
-        text: 'Code',
-        align: 'start',
-        sortable: true,
-        value: 'transactionCode',
-      },
-      {
-        text: 'Store',
-        align: 'start',
-        sortable: true,
-        value: 'storeCode',
-      },
       {
         text: 'Branch',
         align: 'start',
         sortable: true,
-        value: 'branchCode',
+        value: 'branch.name',
       },
       {
         text: 'Date',
@@ -27,10 +16,22 @@ export default {
         value: 'date',
       },
       {
-        text: 'Discount',
+        text: 'Order No.',
+        align: 'start',
+        sortable: true,
+        value: 'order_no',
+      },
+      {
+        text: 'Payment',
+        align: 'start',
+        sortable: true,
+        value: 'payment_amount',
+      },
+      {
+        text: 'Total',
         align: 'right',
         sortable: true,
-        value: 'totalDiscount',
+        value: 'total',
       },
       {
         text: 'Subtotal',
@@ -39,48 +40,23 @@ export default {
         value: 'subtotal',
       },
       {
-        text: 'Total',
+        text: 'Discount',
         align: 'right',
         sortable: true,
-        value: 'total',
+        value: 'discount_total',
+      },
+      {
+        text: 'Discount %',
+        align: 'right',
+        sortable: true,
+        value: 'discount_percentage',
       },
     ],
-    value: {
-      loading: false,
-      items: [
-        {
-          transactionCode: 'ORDER001',
-          storeCode: 'STORE001',
-          branchCode: 'BRANCH001',
-          date: '2023-02-12',
-          totalDiscount: '0',
-          subtotal: '480',
-          total: '480',
-        },
-        {
-          transactionCode: 'ORDER002',
-          storeCode: 'STORE001',
-          branchCode: 'BRANCH001',
-          date: '2023-02-12',
-          totalDiscount: '0',
-          subtotal: '480',
-          total: '480',
-        },
-        {
-          transactionCode: 'ORDER003',
-          storeCode: 'STORE001',
-          branchCode: 'BRANCH001',
-          date: '2023-02-12',
-          totalDiscount: '0',
-          subtotal: '480',
-          total: '480',
-        },
-      ],
-    },
+    value: null,
     options: {
       itemsPerPage: 10,
       page: 1,
-      sortBy: [ 'code' ],
+      sortBy: [ 'created_at' ],
     },
     footerOptions: {
       'items-per-page-options': [ 10, 20, 30, 40, 50 ],

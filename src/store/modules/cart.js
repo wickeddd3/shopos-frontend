@@ -87,18 +87,18 @@ const actions = {
     commit('CART/VALUE/SET', { loading: true });
     const { items, discountPercentage, paymentAmount } = getters.value;
     const cartItems = items.map(item => {
-        const discountDecimal = parseFloat(item.discountPercentage) / 100;
-        const subtotal = parseFloat(item.quantity) * parseFloat(item.price);
-        const discountTotal = discountDecimal * subtotal;
-        return {
-          product_id: item.id,
-          price: parseFloat(item.price),
-          quantity: item.quantity,
-          discount_percentage: item.discountPercentage,
-          discount_total:  discountTotal,
-          total: subtotal - discountTotal,
-          remarks: '',
-        };
+      const discountDecimal = parseFloat(item.discountPercentage) / 100;
+      const subtotal = parseFloat(item.quantity) * parseFloat(item.price);
+      const discountTotal = discountDecimal * subtotal;
+      return {
+        product_id: item.id,
+        price: parseFloat(item.price),
+        quantity: item.quantity,
+        discount_percentage: item.discountPercentage,
+        discount_total: discountTotal,
+        total: subtotal - discountTotal,
+        remarks: '',
+      };
     });
     const cart = {
       branch_id: 1,

@@ -168,7 +168,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      completeTransaction: 'cart/payment/complete'
+      completeTransaction: 'cart/payment/complete',
     }),
   },
 };
