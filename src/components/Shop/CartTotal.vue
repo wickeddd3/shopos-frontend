@@ -40,7 +40,7 @@ export default {
   computed: {
     ...mapGetters({
       subtotal: 'cart/value/subtotal',
-      totalDiscount: 'cart/value/totalDiscount',
+      totalDiscount: 'cart/value/total/discount',
       total: 'cart/value/total',
     }),
   },
