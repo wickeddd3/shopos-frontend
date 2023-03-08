@@ -9,6 +9,7 @@
       >
         <shop-filter-search></shop-filter-search>
         <shop-filter-category></shop-filter-category>
+        <shop-filter-tag></shop-filter-tag>
 
         <div class="my-4">
           <v-row>
@@ -47,6 +48,7 @@ import ShopCartSidebar from '@/components/Shop/ShopCartSidebar';
 import ShopBottomNavigation from '@/components/Shop/ShopBottomNavigation';
 import ShopFilterSearch from '@/components/Shop/ShopFilterSearch.vue';
 import ShopFilterCategory from '@/components/Shop/ShopFilterCategory.vue';
+import ShopFilterTag from '@/components/Shop/ShopFilterTag.vue';
 import ShopProductItemGrid from '@/components/Shop/ShopProductItemGrid';
 
 export default {
@@ -57,6 +59,7 @@ export default {
     ShopBottomNavigation,
     ShopFilterSearch,
     ShopFilterCategory,
+    ShopFilterTag,
     ShopProductItemGrid,
   },
   computed: {
@@ -75,20 +78,24 @@ export default {
     Promise.all([
       this.getProductList(),
       this.getCategoryList(),
+      this.getTagList(),
     ]);
   },
   destroyed () {
     Promise.all([
       this.resetProductList(),
       this.resetCategoryList(),
+      this.resetTagList(),
     ]);
   },
   methods: {
     ...mapActions({
       getProductList: 'products/list/get',
       getCategoryList: 'categories/list/get',
+      getTagList: 'tags/list/get',
       resetProductList: 'products/list/reset',
       resetCategoryList: 'categories/list/reset',
+      resetTagList: 'tags/list/reset',
       addToCart: 'cart/value/items/add',
       closeSnackbar: 'appsnackbar/close',
       closeDialog: 'appdialog/close',
