@@ -1,27 +1,27 @@
 <template>
   <div class="shop-page">
     <shop-appbar></shop-appbar>
-    <shop-sidebar></shop-sidebar>
+    <shop-cart-sidebar></shop-cart-sidebar>
     <v-main>
       <v-container
         class="app-content px-8 mt-2 mb-14"
         fluid
       >
-        <search-filter></search-filter>
-        <category-filter></category-filter>
+        <shop-filter-search></shop-filter-search>
+        <shop-filter-category></shop-filter-category>
 
         <div class="my-4">
           <v-row>
             <v-col v-for="item in productItems" :key="item.id" cols="2">
-              <product-grid
+              <shop-product-item-grid
                 :item="item"
                 @click:item="addToCart(item)"
-              ></product-grid>
+              ></shop-product-item-grid>
             </v-col>
           </v-row>
         </div>
       </v-container>
-      <bottom-navigation></bottom-navigation>
+      <shop-bottom-navigation></shop-bottom-navigation>
     </v-main>
     <app-snackbar
       :show="snackbarShow"
@@ -42,22 +42,22 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import ShopAppbar from '@/components/Shop/Appbar';
-import ShopSidebar from '@/components/Shop/Sidebar';
-import BottomNavigation from '@/components/Shop/BottomNavigation';
-import SearchFilter from '@/components/Shop/SearchFilter.vue';
-import CategoryFilter from '@/components/Shop/CategoryFilter.vue';
-import ProductGrid from '@/components/Shop/ProductGrid';
+import ShopAppbar from '@/components/Shop/ShopAppbar';
+import ShopCartSidebar from '@/components/Shop/ShopCartSidebar';
+import ShopBottomNavigation from '@/components/Shop/ShopBottomNavigation';
+import ShopFilterSearch from '@/components/Shop/ShopFilterSearch.vue';
+import ShopFilterCategory from '@/components/Shop/ShopFilterCategory.vue';
+import ShopProductItemGrid from '@/components/Shop/ShopProductItemGrid';
 
 export default {
   name: 'Shop',
   components: {
     ShopAppbar,
-    ShopSidebar,
-    BottomNavigation,
-    SearchFilter,
-    CategoryFilter,
-    ProductGrid,
+    ShopCartSidebar,
+    ShopBottomNavigation,
+    ShopFilterSearch,
+    ShopFilterCategory,
+    ShopProductItemGrid,
   },
   computed: {
     ...mapGetters({

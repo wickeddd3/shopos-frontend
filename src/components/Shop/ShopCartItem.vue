@@ -42,7 +42,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'CartItem',
+  name: 'ShopCartItem',
   props: {
     item: {
       tyle: Object,

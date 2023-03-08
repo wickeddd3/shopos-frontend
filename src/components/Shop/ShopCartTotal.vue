@@ -36,7 +36,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'CartTotal',
+  name: 'ShopCartTotal',
   computed: {
     ...mapGetters({
       subtotal: 'cart/value/subtotal',

@@ -25,12 +25,12 @@
         :key="item.id"
         class="mb-2"
       >
-        <cart-item :item="item"></cart-item>
+        <shop-cart-item :item="item"></shop-cart-item>
       </v-list-item>
     </v-list>
 
     <template v-slot:append>
-      <cart-total></cart-total>
+      <shop-cart-total></shop-cart-total>
 
       <div class="pa-2">
         <v-btn
@@ -49,14 +49,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import Breakpoints from '@/mixins/Breakpoints';
-import CartItem from '@/components/Shop/CartItem';
-import CartTotal from '@/components/Shop/CartTotal';
+import ShopCartItem from '@/components/Shop/ShopCartItem';
+import ShopCartTotal from '@/components/Shop/ShopCartTotal';
 
 export default {
-  name: 'ShopSidebar',
+  name: 'ShopCartSidebar',
   components: {
-    CartItem,
-    CartTotal,
+    ShopCartItem,
+    ShopCartTotal,
   },
   mixins: [ Breakpoints ],
   computed: {

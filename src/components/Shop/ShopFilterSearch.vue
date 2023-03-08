@@ -16,6 +16,6 @@
 
 <script>
 export default {
-  name: 'SearchFilter',
+  name: 'ShopFilterSearch',
 };
 </script>

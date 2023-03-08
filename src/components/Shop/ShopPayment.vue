@@ -103,7 +103,7 @@
 
         <v-tabs-items v-model="tab">
           <v-tab-item class="pt-4">
-            <cash-payment></cash-payment>
+            <shop-payment-cash></shop-payment-cash>
           </v-tab-item>
           <v-tab-item class="pt-4">
             Soon
@@ -119,12 +119,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import CashPayment from '@/components/Shop/PaymentCash';
+import ShopPaymentCash from '@/components/Shop/ShopPaymentCash';
 
 export default {
-  name: 'Payment',
+  name: 'ShopPayment',
   components: {
-    CashPayment,
+    ShopPaymentCash,
   },
   data () {
     return {

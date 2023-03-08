@@ -1,7 +1,7 @@
 import { cloneDeep } from 'lodash';
 import initialState from '@/config/cart.state.js';
 import OrderResource from '@/api/shop/OrderResource';
-import Payment from '@/components/Shop/Payment';
+import ShopPayment from '@/components/Shop/ShopPayment';
 
 const resource = new OrderResource();
 
@@ -100,7 +100,7 @@ const actions = {
   'payment/set': ({ dispatch }) => {
     dispatch('appdialog/set', {
       show: true,
-      component: Payment,
+      component: ShopPayment,
     }, { root: true });
   },
   'payment/complete': async ({ commit, getters, dispatch }) => {

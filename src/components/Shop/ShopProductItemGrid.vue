@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'ProductGrid',
+  name: 'ShopProductItemGrid',
   props: {
     item: {
       type: Object,

@@ -171,7 +171,7 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: 'PaymentCash',
+  name: 'ShopPaymentCash',
   computed: {
     ...mapGetters({
       loading: 'cart/value/loading',
