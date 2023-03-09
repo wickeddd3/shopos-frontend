@@ -4,5 +4,6 @@ export default {
     discountPercentage: 0,
     paymentAmount: '',
     loading: false,
+    dialog: false,
   },
 };

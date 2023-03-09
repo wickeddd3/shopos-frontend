@@ -21,18 +21,21 @@
         <shop-payment-options></shop-payment-options>
       </v-sheet>
     </div>
+    <shop-void-transaction></shop-void-transaction>
   </v-card>
 </template>
 
 <script>
 import ShopPaymentOrderDetails from '@/components/Shop/ShopPaymentOrderDetails';
 import ShopPaymentOptions from '@/components/Shop/ShopPaymentOptions';
+import ShopVoidTransaction from '@/components/Shop/ShopVoidTransaction';
 
 export default {
   name: 'ShopPayment',
   components: {
     ShopPaymentOrderDetails,
     ShopPaymentOptions,
+    ShopVoidTransaction,
   },
 };
 </script>

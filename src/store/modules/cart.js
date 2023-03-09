@@ -30,6 +30,7 @@ const getters = {
     return (change > 0) ? change : 0;
   },
   'value/disabled': (state, getters) => getters['value/total'] > (parseFloat(getters['value/payment/amount']) || 0),
+  'value/dialog': ({ value: { dialog } }) => dialog,
 };
 
 const mutations = {
@@ -96,7 +97,16 @@ const actions = {
       discountPercentage: 0,
       paymentAmount: '',
       loading: false,
+      dialog: false,
     });
+  },
+  'value/void/prompt': ({ commit }) => commit('CART/VALUE/SET', { dialog: true }),
+  'value/void/prompt/confirm': async ({ dispatch }) => {
+    dispatch('value/reset');
+    dispatch('appdialog/close', {}, { root: true });
+  },
+  'value/void/prompt/cancel': ({ commit }) => {
+    commit('CART/VALUE/SET', { dialog: false });
   },
   'payment/set': ({ dispatch }) => {
     dispatch('appdialog/set', {

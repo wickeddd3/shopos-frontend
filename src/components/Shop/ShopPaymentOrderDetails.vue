@@ -61,7 +61,7 @@
         block
         outlined
         tile
-        @click="closeDialog"
+        @click="voidTransaction"
       >Void Transaction</v-btn>
     </v-list>
   </div>
@@ -83,6 +83,7 @@ export default {
   methods: {
     ...mapActions({
       closeDialog: 'appdialog/close',
+      voidTransaction: 'cart/value/void/prompt',
     }),
   },
 };
