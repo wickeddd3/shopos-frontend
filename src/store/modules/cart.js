@@ -13,6 +13,7 @@ const getters = {
   value: ({ value }) => value,
   'value/loading': ({ value: { loading } }) => loading,
   'value/items': ({ value: { items } }) => items,
+  'value/items/total': ({ value: { items } }) => items.length,
   'value/subtotal': ({ value: { items } }) => items.reduce((total, item) => {
     total += parseFloat(item.price) * parseFloat(item.quantity);
     return total;

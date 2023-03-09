@@ -19,7 +19,11 @@
       </v-list-item>
     </template>
 
-    <v-list dense class="py-4">
+    <v-list
+      v-if="cartItemsTotal > 0"
+      class="py-4"
+      dense
+    >
       <v-list-item
         v-for="item in cartItems"
         :key="item.id"
@@ -28,6 +32,19 @@
         <shop-cart-item :item="item"></shop-cart-item>
       </v-list-item>
     </v-list>
+
+    <v-layout
+      v-else
+      class="fill-height"
+      column
+      justify-center
+      align-center
+    >
+      <v-icon
+        size="100"
+        class="grey--text text--lighten-3"
+      >mdi-cart-off</v-icon>
+    </v-layout>
 
     <template v-slot:append>
       <shop-cart-total></shop-cart-total>
@@ -63,6 +80,7 @@ export default {
     ...mapGetters({
       show: 'shop/show',
       cartItems: 'cart/value/items',
+      cartItemsTotal: 'cart/value/items/total',
       total: 'cart/value/total',
     }),
   },
