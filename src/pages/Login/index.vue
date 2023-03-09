@@ -1,26 +1,30 @@
 <template>
-  <v-row
-    justify="center"
-    class="mt-15"
+  <v-layout
+    class="pa-2"
+    column
+    justify-center
+    align-center
   >
-    <v-col
-      xl="4"
-      lg="5"
-      md="8"
-      sm="8"
-      xs="12"
+    <v-card
+      width="500"
+      outlined
+      flat
     >
+      <v-card-title class="px-8 primary white--text">
+        s h o p o s
+      </v-card-title>
       <validation-observer v-slot="{ handleSubmit, invalid }" slim>
         <v-form
           ref="form"
-          class="px-8"
+          class="px-8 py-6"
           @submit.prevent="handleSubmit(login)"
         >
-          <h1 class="my-4">Login</h1>
+          <h2 class="my-4 font-weight-bold mb-8">Log in to shopos</h2>
           <app-error-message
             :status="status"
             :errors="errors"
           ></app-error-message>
+          <h5 class="subtitle-1 font-weight-medium mb-2">Email</h5>
           <validation-provider
             v-slot="{ errors }"
             vid="email"
@@ -30,11 +34,10 @@
             <v-text-field
               v-model="email"
               :error-messages="errors"
-              label="Email"
-              outlined
+              solo
             ></v-text-field>
           </validation-provider>
-
+          <h5 class="subtitle-1 font-weight-medium mb-2">Password</h5>
           <validation-provider
             v-slot="{ errors }"
             vid="password"
@@ -46,27 +49,28 @@
               :error-messages="errors"
               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show ? 'text' : 'password'"
-              label="Password"
-              outlined
+              solo
               @click:append="show = !show"
             ></v-text-field>
           </validation-provider>
 
-          <v-btn
-            :disabled="invalid"
-            :loading="loading"
-            color="primary"
-            class="mt-2 py-8 text-h6 font-weight-bold"
-            type="submit"
-            large
-            block
-          >
-            Login
-          </v-btn>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              :disabled="invalid"
+              :loading="loading"
+              color="primary"
+              class="mt-2 px-8 py-5 subtitle-1 font-weight-bold text-capitalize"
+              type="submit"
+            >
+              Log In
+            </v-btn>
+          </v-card-actions>
         </v-form>
       </validation-observer>
-    </v-col>
-  </v-row>
+    </v-card>
+    <h6 class="subtitle-2 font-weight-light pa-4 grey--text text--darken-1">WickedWorks</h6>
+  </v-layout>
 </template>
 
 <script>
