@@ -10,17 +10,7 @@
         <shop-filter-search></shop-filter-search>
         <shop-filter-category></shop-filter-category>
         <shop-filter-tag></shop-filter-tag>
-
-        <div class="my-4">
-          <v-row>
-            <v-col v-for="item in productItems" :key="item.id" cols="2">
-              <shop-product-item-grid
-                :item="item"
-                @click:item="addToCart(item)"
-              ></shop-product-item-grid>
-            </v-col>
-          </v-row>
-        </div>
+        <shop-products></shop-products>
       </v-container>
       <shop-bottom-navigation></shop-bottom-navigation>
     </v-main>
@@ -49,7 +39,7 @@ import ShopBottomNavigation from '@/components/Shop/ShopBottomNavigation';
 import ShopFilterSearch from '@/components/Shop/ShopFilterSearch.vue';
 import ShopFilterCategory from '@/components/Shop/ShopFilterCategory.vue';
 import ShopFilterTag from '@/components/Shop/ShopFilterTag.vue';
-import ShopProductItemGrid from '@/components/Shop/ShopProductItemGrid';
+import ShopProducts from '@/components/Shop/ShopProducts';
 
 export default {
   name: 'Shop',
@@ -60,7 +50,7 @@ export default {
     ShopFilterSearch,
     ShopFilterCategory,
     ShopFilterTag,
-    ShopProductItemGrid,
+    ShopProducts,
   },
   computed: {
     ...mapGetters({
@@ -69,9 +59,6 @@ export default {
       dialogShow: 'appdialog/show',
       dialogComponent: 'appdialog/component',
       dialogMaxwidth: 'appdialog/maxwidth',
-      productReady: 'products/list/ready',
-      productLoading: 'products/list/loading',
-      productItems: 'products/list/value/items',
     }),
   },
   created () {
@@ -96,7 +83,6 @@ export default {
       resetProductList: 'products/list/reset',
       resetCategoryList: 'categories/list/reset',
       resetTagList: 'tags/list/reset',
-      addToCart: 'cart/value/items/add',
       closeSnackbar: 'appsnackbar/close',
       closeDialog: 'appdialog/close',
     }),

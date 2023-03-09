@@ -35,6 +35,7 @@
               v-model="email"
               :error-messages="errors"
               solo
+              autofocus
             ></v-text-field>
           </validation-provider>
           <h5 class="subtitle-1 font-weight-medium mb-2">Password</h5>
