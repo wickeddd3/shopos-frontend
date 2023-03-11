@@ -91,6 +91,14 @@ const actions = {
     items.push(item);
     commit('CART/VALUE/SET', { items });
   },
+  'value/items/add/barcode': ({ dispatch, rootGetters }, barcode) => {
+    const items = cloneDeep(rootGetters['products/list/value/items']);
+    const item = (items || []).find(item => item.barcode === barcode);
+    if (item) {
+      dispatch('value/items/add', item);
+    }
+    return true;
+  },
   'value/reset': ({ commit }) => {
     commit('CART/VALUE/SET', {
       items: [],
