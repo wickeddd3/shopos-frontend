@@ -16,14 +16,14 @@
 
     <v-list-item-content>
       <v-list-item-title
-        class="subtitle-2 font-weight-light"
+        class="subtitle-2 font-weight-light text-truncate"
       >
         {{ item.name }}
       </v-list-item-title>
       <v-list-item-subtitle
         class="subtitle-2 black--text"
       >
-        {{ `$ ${item.price}` }}
+        {{ `$ ${(item.price || 0)}` }}
       </v-list-item-subtitle>
     </v-list-item-content>
 
