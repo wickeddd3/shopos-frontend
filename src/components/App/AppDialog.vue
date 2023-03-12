@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'AppDialog',
   props: {
@@ -38,6 +40,14 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  destroyed () {
+    this.reset();
+  },
+  methods: {
+    ...mapActions({
+      reset: 'appdialog/reset',
+    }),
   },
 };
 </script>
