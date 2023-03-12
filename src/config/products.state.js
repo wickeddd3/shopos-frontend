@@ -98,4 +98,8 @@ export default {
     errors: {},
     status: null,
   },
+  selected: {
+    ready: false,
+    value: {},
+  },
 };

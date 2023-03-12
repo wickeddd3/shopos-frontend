@@ -127,6 +127,7 @@ const actions = {
     dispatch('appdialog/set', {
       show: true,
       component: ShopPayment,
+      fullscreen: true,
     }, { root: true });
   },
   'payment/complete': async ({ commit, getters, dispatch }) => {

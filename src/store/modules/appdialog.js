@@ -3,6 +3,7 @@ const state = {
     show: false,
     maxwidth: '600px',
     component: null,
+    fullscreen: false,
   },
 };
 
@@ -10,6 +11,7 @@ const getters = {
   show: ({ value: { show } }) => show,
   maxwidth: ({ value: { maxwidth } }) => maxwidth,
   component: ({ value: { component } }) => component,
+  fullscreen: ({ value: { fullscreen } }) => fullscreen,
 };
 
 const mutations = {
@@ -17,12 +19,13 @@ const mutations = {
 };
 
 const actions = {
-  close: ({ commit }) => commit('DIALOG/SET', { show: false, component: null }),
+  close: ({ commit }) => commit('DIALOG/SET', { show: false, component: null, fullscreen: false }),
   set: ({ commit }, dialog) => commit('DIALOG/SET', dialog),
   reset: ({ commit }) => commit('DIALOG/SET', {
     show: false,
     maxwidth: '600px',
     component: null,
+    fullscreen: false,
   }),
 };
 

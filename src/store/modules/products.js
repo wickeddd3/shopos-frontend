@@ -1,6 +1,7 @@
 import initialState from '@/config/products.state.js';
 import ProductResource from '@/api/product/ProductResource';
 import ProductForm from '@/components/Product/ProductForm';
+import ProductDetails from '@/components/Product/ProductDetails';
 
 const resource = new ProductResource();
 
@@ -33,6 +34,18 @@ const getters = {
   'form/value/tags': ({ form: { value: { tags } } }) => tags,
   'form/value/price': ({ form: { value: { price } } }) => price,
   'form/value/discount/percentage': ({ form: { value } }) => value?.discount_percentage,
+  'selected/ready': ({ selected: { ready } }) => ready,
+  'selected/value': ({ selected: { value } }) => value,
+  'selected/value/branch/name': ({ selected: { value } }) => value?.branch?.name,
+  'selected/value/category/name': ({ selected: { value } }) => value?.category?.name,
+  'selected/value/brand/name': ({ selected: { value } }) => value?.brand?.name,
+  'selected/value/code': ({ selected: { value } }) => value?.code,
+  'selected/value/sku': ({ selected: { value } }) => value?.sku,
+  'selected/value/barcode': ({ selected: { value } }) => value?.barcode,
+  'selected/value/name': ({ selected: { value } }) => value?.name,
+  'selected/value/description': ({ selected: { value } }) => value?.description,
+  'selected/value/price': ({ selected: { value } }) => value?.price,
+  'selected/value/discount/percentage': ({ selected: { value } }) => value?.discount_percentage,
 };
 
 const mutations = {
@@ -40,6 +53,7 @@ const mutations = {
   'LIST/OPTIONS/SET': (state, options) => { state.list.options = { ...state.list.options, ...options }; },
   'FORM/SET': (state, form) => { state.form = { ...state.form, ...form }; },
   'FORM/VALUE/SET': (state, value) => { state.form.value = { ...state.form.value, ...value }; },
+  'SELECTED/SET': (state, selected) => { state.selected = { ...state.selected, ...selected }; },
 };
 
 const actions = {
@@ -108,6 +122,20 @@ const actions = {
       return;
     }
     await dispatch('create');
+  },
+  'selected/show': ({ commit, dispatch }, value) => {
+    commit('SELECTED/SET', { value, ready: true });
+    dispatch('appdialog/set', {
+      show: true,
+      component: ProductDetails,
+      maxwidth: '800px',
+    }, { root: true });
+  },
+  'selected/reset': ({ commit }) => {
+    commit('SELECTED/SET', {
+      ready: false,
+      value: {},
+    });
   },
   add: ({ dispatch }) => {
     dispatch('appdialog/set', {

@@ -3,7 +3,6 @@
     link
     @click="$emit('click:item')"
   >
-
     <v-chip
       v-if="isSale"
       color="red lighten-1"
@@ -29,7 +28,10 @@
           {{ `$ ${(item.price || 0)}` }}
         </span>
       </div>
-      <v-btn icon>
+      <v-btn
+        icon
+        @click.stop="showSelected(item)"
+      >
         <v-icon color="grey lighten-1">mdi-information</v-icon>
       </v-btn>
     </v-card-actions>
@@ -37,6 +39,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'ShopProductGridItem',
   props: {
@@ -52,6 +56,11 @@ export default {
     discount () {
       return `${parseFloat(this.item.discount_percentage || 0)}%`;
     },
+  },
+  methods: {
+    ...mapActions({
+      showSelected: 'products/selected/show',
+    }),
   },
 };
 </script>

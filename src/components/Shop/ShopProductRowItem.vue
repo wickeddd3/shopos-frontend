@@ -5,6 +5,14 @@
     @click="$emit('click:item')"
   >
     <v-card class="mr-4" flat>
+      <v-chip
+        v-if="isSale"
+        color="red lighten-1"
+        text-color="white"
+        class="font-weight-bold discount-label"
+        label
+        x-small
+      >{{ discount }}</v-chip>
       <v-img
         src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
         min-height="60"
@@ -28,7 +36,10 @@
     </v-list-item-content>
 
     <v-list-item-action>
-      <v-btn icon>
+      <v-btn
+        icon
+        @click.stop="showSelected(item)"
+      >
         <v-icon color="grey lighten-1">mdi-information</v-icon>
       </v-btn>
     </v-list-item-action>
@@ -36,6 +47,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'ShopProductRowItem',
   props: {
@@ -44,5 +57,28 @@ export default {
       default: () => {},
     },
   },
+  computed: {
+    isSale () {
+      return parseFloat(this.item.discount_percentage || 0) > 0;
+    },
+    discount () {
+      return `${parseFloat(this.item.discount_percentage || 0)}%`;
+    },
+  },
+  methods: {
+    ...mapActions({
+      showSelected: 'products/selected/show',
+    }),
+  },
 };
 </script>
+
+<style scoped>
+.discount-label {
+  position: absolute;
+  z-index: 100;
+  margin: 4px;
+  right: 0;
+  opacity: 0.8;
+}
+</style>

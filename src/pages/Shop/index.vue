@@ -23,7 +23,7 @@
       :show="dialogShow"
       :component="dialogComponent"
       :max-width="dialogMaxwidth"
-      :fullscreen="true"
+      :fullscreen="dialogFullscreen"
       transition="dialog-bottom-transition"
       @cancel="closeDialog"
       @close="closeDialog"
@@ -59,6 +59,7 @@ export default {
       dialogShow: 'appdialog/show',
       dialogComponent: 'appdialog/component',
       dialogMaxwidth: 'appdialog/maxwidth',
+      dialogFullscreen: 'appdialog/fullscreen',
     }),
   },
   created () {
