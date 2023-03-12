@@ -84,6 +84,7 @@ export default {
       barcode: null,
       name: null,
       description: null,
+      tags: [],
       price: null,
     },
     loading: false,

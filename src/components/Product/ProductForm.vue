@@ -73,6 +73,27 @@
         </validation-provider>
         <validation-provider
           v-slot="{ errors }"
+          vid="tags"
+          name="Tags"
+        >
+          <v-autocomplete
+            v-model="tags"
+            :error-messages="errors"
+            :loading="tagListLoading"
+            :items="tagListItems"
+            label="Tags"
+            item-text="name"
+            item-value="id"
+            outlined
+            dense
+            cache-items
+            flat
+            hide-no-data
+            multiple
+          ></v-autocomplete>
+        </validation-provider>
+        <validation-provider
+          v-slot="{ errors }"
           vid="code"
           name="Code"
         >
@@ -159,6 +180,8 @@ export default {
       categoryListItems: 'categories/list/value/items',
       brandListLoading: 'brands/list/loading',
       brandListItems: 'brands/list/value/items',
+      tagListLoading: 'tags/list/loading',
+      tagListItems: 'tags/list/value/items',
     }),
     branch: {
       ...mapGetters({ get: 'products/form/value/branch' }),
@@ -192,6 +215,10 @@ export default {
       ...mapGetters({ get: 'products/form/value/description' }),
       ...mapActions({ set: 'products/form/value/description' }),
     },
+    tags: {
+      ...mapGetters({ get: 'products/form/value/tags' }),
+      ...mapActions({ set: 'products/form/value/tags' }),
+    },
     price: {
       ...mapGetters({ get: 'products/form/value/price' }),
       ...mapActions({ set: 'products/form/value/price' }),
@@ -202,6 +229,7 @@ export default {
       this.getBranchList(),
       this.getCategoryList(),
       this.getBrandList(),
+      this.getTagList(),
     ]);
   },
   destroyed () {
@@ -212,6 +240,7 @@ export default {
       getBranchList: 'branches/list/get',
       getCategoryList: 'categories/list/get',
       getBrandList: 'brands/list/get',
+      getTagList: 'tags/list/get',
       resetForm: 'products/form/reset',
       submitForm: 'products/form/submit',
     }),
