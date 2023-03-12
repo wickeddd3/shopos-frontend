@@ -19,7 +19,7 @@
       <v-icon>mdi-star-outline</v-icon>
     </v-btn>
     <v-btn>
-      <span>Today's Pick</span>
+      <span>Recent Purchased</span>
       <v-icon>mdi-playlist-star</v-icon>
     </v-btn>
   </v-bottom-navigation>

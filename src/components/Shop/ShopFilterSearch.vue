@@ -1,11 +1,13 @@
 <template>
   <div class="d-flex justify-content-between align-center">
     <v-text-field
+      v-model="searchQuery"
       class="mr-4"
       prepend-inner-icon="mdi-magnify"
       solo
       hide-details
       clearable
+      @input="search"
     ></v-text-field>
 
     <v-tooltip left>
@@ -26,9 +28,15 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { debounce } from 'lodash';
 
 export default {
   name: 'ShopFilterSearch',
+  data () {
+    return {
+      searchQuery: null,
+    };
+  },
   computed: {
     ...mapGetters({
       icon: 'shop/products/layout/icon',
@@ -37,7 +45,11 @@ export default {
   methods: {
     ...mapActions({
       toggleLayout: 'shop/products/layout/toggle',
+      getProductList: 'products/list/get',
     }),
+    search: debounce(function () {
+      this.getProductList({ query: this.searchQuery });
+    }, 500),
   },
 };
 </script>

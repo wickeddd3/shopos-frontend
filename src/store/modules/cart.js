@@ -133,14 +133,14 @@ const actions = {
     commit('CART/VALUE/SET', { loading: true });
     const { items, discountPercentage, paymentAmount } = getters.value;
     const cartItems = items.map(item => {
-      const discountDecimal = parseFloat(item.discountPercentage) / 100;
-      const subtotal = parseFloat(item.quantity) * parseFloat(item.price);
+      const discountDecimal = parseFloat(item.discount_percentage || 0) / 100;
+      const subtotal = parseFloat(item.quantity) * parseFloat(item.price || 0);
       const discountTotal = discountDecimal * subtotal;
       return {
         product_id: item.id,
-        price: parseFloat(item.price),
+        price: parseFloat(item.price || 0),
         quantity: item.quantity,
-        discount_percentage: item.discountPercentage,
+        discount_percentage: item.discount_percentage || 0,
         discount_total: discountTotal,
         total: subtotal - discountTotal,
         remarks: '',
