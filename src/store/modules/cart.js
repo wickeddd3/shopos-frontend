@@ -15,11 +15,13 @@ const getters = {
   'value/items': ({ value: { items } }) => items,
   'value/items/total': ({ value: { items } }) => items.length,
   'value/subtotal': ({ value: { items } }) => items.reduce((total, item) => {
-    total += parseFloat(item.price) * parseFloat(item.quantity);
+    total += parseFloat(item.price || 0) * parseFloat(item.quantity);
     return total;
   }, 0),
   'value/total/discount': ({ value: { items } }) => items.reduce((total, item) => {
-    total += (parseFloat(item.discountPercentage) / 100) * parseFloat(item.price);
+    total += (
+      (parseFloat(item.discount_percentage || 0) / 100) * parseFloat(item.price || 0)
+    ) * parseFloat(item.quantity);
     return total;
   }, 0),
   'value/total': (state, getters) => getters['value/subtotal'] - getters['value/total/discount'],
@@ -86,7 +88,6 @@ const actions = {
     const item = {
       ...selected,
       quantity: 1,
-      discountPercentage: 0,
     };
     items.push(item);
     commit('CART/VALUE/SET', { items });

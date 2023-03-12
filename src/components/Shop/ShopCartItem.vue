@@ -8,11 +8,11 @@
               {{ item.name }}
             </h5>
             <h5 class="subtitle-2 font-weight-light">
-              {{ `${item.discountPercentage} % discount` }}
+              {{ `${discount(item.discount_percentage)} % discount` }}
             </h5>
           </div>
           <h5 class="subtitle-1 font-weight-regular">
-            {{ `${item.quantity} x $ ${item.price}` }}
+            {{ `${item.quantity} x $ ${(item.price || 0)}` }}
           </h5>
         </div>
       </v-expansion-panel-header>
@@ -55,6 +55,12 @@ export default {
       deductQuantity: 'cart/value/items/item/quantity/deduct',
       inputQuantity: 'cart/value/items/item/quantity',
     }),
+    discount (discount) {
+      if (discount) {
+        return (parseFloat(discount) % 1) === 0 ? Math.round(discount) : discount;
+      }
+      return 0;
+    },
   },
 };
 </script>

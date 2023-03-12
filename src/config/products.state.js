@@ -51,6 +51,12 @@ export default {
         sortable: true,
         value: 'price',
       },
+      {
+        text: 'Disc %',
+        align: 'right',
+        sortable: true,
+        value: 'discount_percentage',
+      },
       // {
       //   text: 'Tags',
       //   align: 'start',
@@ -86,6 +92,7 @@ export default {
       description: null,
       tags: [],
       price: null,
+      discount_percentage: null,
     },
     loading: false,
     errors: {},

@@ -16,7 +16,7 @@
       <span
         class="subtitle-2"
       >
-        {{ `$ ${item.price}` }}
+        {{ `$ ${(item.price || 0)}` }}
       </span>
     </v-card-actions>
   </v-card>

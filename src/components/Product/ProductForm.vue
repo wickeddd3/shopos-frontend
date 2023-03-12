@@ -156,7 +156,37 @@
             type="number"
             outlined
             dense
+            @keypress.prevent.e
           ></v-text-field>
+        </validation-provider>
+        <validation-provider
+          v-slot="{ errors }"
+          vid="discountPercentage"
+          name="Discount Percentage"
+        >
+          <v-text-field
+            v-model.number="discountPercentage"
+            :error-messages="errors"
+            label="Discount %"
+            type="number"
+            outlined
+            dense
+            @keypress.prevent.e
+          ></v-text-field>
+        </validation-provider>
+        <validation-provider
+          v-slot="{ errors }"
+          vid="description"
+          name="Description"
+        >
+          <v-textarea
+            v-model="description"
+            :error-messages="errors"
+            label="Description"
+            rows="3"
+            outlined
+            dense
+          ></v-textarea>
         </validation-provider>
       </v-container>
     </template>
@@ -222,6 +252,10 @@ export default {
     price: {
       ...mapGetters({ get: 'products/form/value/price' }),
       ...mapActions({ set: 'products/form/value/price' }),
+    },
+    discountPercentage: {
+      ...mapGetters({ get: 'products/form/value/discount/percentage' }),
+      ...mapActions({ set: 'products/form/value/discount/percentage' }),
     },
   },
   created () {

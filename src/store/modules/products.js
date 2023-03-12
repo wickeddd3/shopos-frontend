@@ -32,6 +32,7 @@ const getters = {
   'form/value/description': ({ form: { value: { description } } }) => description,
   'form/value/tags': ({ form: { value: { tags } } }) => tags,
   'form/value/price': ({ form: { value: { price } } }) => price,
+  'form/value/discount/percentage': ({ form: { value } }) => value?.discount_percentage,
 };
 
 const mutations = {
@@ -79,6 +80,7 @@ const actions = {
   'form/value/description': ({ commit }, description) => commit('FORM/VALUE/SET', { description }),
   'form/value/tags': ({ commit }, tags) => commit('FORM/VALUE/SET', { tags }),
   'form/value/price': ({ commit }, price) => commit('FORM/VALUE/SET', { price }),
+  'form/value/discount/percentage': ({ commit }, discountPercentage) => commit('FORM/VALUE/SET', { discount_percentage: discountPercentage }),
   'form/reset': ({ commit }) => {
     commit('FORM/SET', {
       value: {
@@ -90,6 +92,9 @@ const actions = {
         barcode: null,
         name: null,
         description: null,
+        tags: [],
+        price: null,
+        discount_percentage: null,
       },
       loading: false,
       errors: {},
