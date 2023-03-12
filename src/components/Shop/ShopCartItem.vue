@@ -3,13 +3,22 @@
     <v-expansion-panel>
       <v-expansion-panel-header class="pa-0" hide-actions>
         <div class="d-flex justify-space-between align-start">
-          <div class="d-flex flex-column text-truncate">
-            <h5 class="subtitle-1 font-weight-regular text-truncate text-no-wrap">
-              {{ item.name }}
-            </h5>
-            <h5 class="subtitle-2 font-weight-light">
-              {{ `${discount(item.discount_percentage)} % discount` }}
-            </h5>
+          <div class="d-flex align-center">
+            <v-btn
+              class="mr-4"
+              icon
+              @click.stop="removeItem(item)"
+            >
+              <v-icon>mdi-delete-outline</v-icon>
+            </v-btn>
+            <div class="d-flex flex-column text-truncate">
+              <h5 class="subtitle-1 font-weight-regular text-truncate text-no-wrap">
+                {{ item.name }}
+              </h5>
+              <h5 class="subtitle-2 font-weight-light">
+                {{ `${discount(item.discount_percentage)} % discount` }}
+              </h5>
+            </div>
           </div>
           <h5 class="subtitle-1 font-weight-regular">
             {{ `${item.quantity} x $ ${(item.price || 0)}` }}
@@ -54,6 +63,7 @@ export default {
       addQuantity: 'cart/value/items/item/quantity/add',
       deductQuantity: 'cart/value/items/item/quantity/deduct',
       inputQuantity: 'cart/value/items/item/quantity',
+      removeItem: 'cart/value/items/remove',
     }),
     discount (discount) {
       if (discount) {

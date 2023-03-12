@@ -78,6 +78,12 @@ const actions = {
     }
     commit('CART/VALUE/SET', { paymentAmount });
   },
+  'value/items/remove': ({ commit, getters }, selected) => {
+    const items = cloneDeep(getters['value/items']);
+    const index = items.findIndex(item => item.id === selected.id);
+    items.splice(index, 1);
+    commit('CART/VALUE/SET', { items });
+  },
   'value/items/add': ({ commit, getters, dispatch }, selected) => {
     const items = cloneDeep(getters['value/items']);
     const exist = items.find(item => item.id === selected.id);
