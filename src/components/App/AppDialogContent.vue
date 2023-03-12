@@ -13,17 +13,25 @@
       @submit.prevent="$emit('submit')"
     >
       <v-card>
-        <v-card-title>
-          <slot
-            v-if="$scopedSlots.header"
-            name="header"
-          ></slot>
+        <slot
+          v-if="$scopedSlots.header"
+          name="header"
+        ></slot>
+        <div
+          v-else
+          class="d-flex justify-space-between align-center pa-4"
+        >
           <span
-            v-else
             class="subtitle-1 font-weight-medium text-uppercase"
             v-text="title"
           ></span>
-        </v-card-title>
+          <v-btn
+            icon
+            @click="$emit('cancel')"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
         <v-card-text class="px-2 py-0">
           <slot
             :default="{
@@ -34,7 +42,10 @@
           ></slot>
         </v-card-text>
         <v-divider class="mx-5"></v-divider>
-        <v-card-actions class="pa-5">
+        <v-card-actions
+          v-if="hasActionButtons"
+          class="pa-5"
+        >
           <slot
             v-if="$scopedSlots.footer"
             name="footer"
@@ -74,6 +85,10 @@ export default {
     title: {
       type: String,
       default: '',
+    },
+    hasActionButtons: {
+      type: Boolean,
+      default: true,
     },
   },
 };

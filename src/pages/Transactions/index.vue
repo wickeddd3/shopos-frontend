@@ -26,6 +26,7 @@
       :footer-props="footerOptions"
       :loading="loading"
       class="elevation-1"
+      @click:row="showSelected"
     ></v-data-table>
     <v-skeleton-loader
       v-else
@@ -73,6 +74,7 @@ export default {
     ...mapActions({
       getList: 'transactions/list/get',
       resetList: 'transactions/list/reset',
+      showSelected: 'transactions/selected/show',
     }),
     search: debounce(function () {
       this.getList({ query: this.searchQuery });
