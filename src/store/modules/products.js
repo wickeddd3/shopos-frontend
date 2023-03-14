@@ -172,6 +172,19 @@ const actions = {
       await dispatch('list/get');
     }
   },
+  favorite: async ({ dispatch }, item) => {
+    const value = { favorite: !item.favorite };
+    const { status } = await resource.favorite(item.id, value);
+    if (status === 200) {
+      let text = 'Product has been successfully marked as favorite.';
+      if (!value.favorite) {
+        text = 'Product has been successfully removed as favorite';
+      }
+      await dispatch('appsnackbar/set', { show: true, text }, { root: true });
+      await dispatch('appdialog/reset', {}, { root: true });
+      await dispatch('list/get');
+    }
+  },
 };
 
 export default {

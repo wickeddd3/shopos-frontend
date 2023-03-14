@@ -26,4 +26,10 @@ export default class BranchResource extends ResourceClient {
       .then(response => response)
       .catch(error => error.response);
   }
+
+  favorite (id, data) {
+    return super.put(data, { url: `${this._url}/${id}/favorite` })
+      .then(response => response)
+      .catch(error => error.response);
+  }
 }

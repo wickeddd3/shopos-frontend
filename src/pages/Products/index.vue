@@ -40,9 +40,36 @@
       class="elevation-1"
     >
       <template v-slot:item.options="{ item }">
-        <v-btn icon @click="edit(item)">
-          <v-icon small>mdi-pencil</v-icon>
-        </v-btn>
+        <v-tooltip left>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              class="mr-2"
+              icon
+              v-bind="attrs"
+              v-on="on"
+              @click="edit(item)"
+            >
+              <v-icon small>mdi-pencil</v-icon>
+            </v-btn>
+          </template>
+          Edit
+        </v-tooltip>
+
+        <v-tooltip left>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              icon
+              v-bind="attrs"
+              v-on="on"
+              @click="favorite(item)"
+            >
+              <v-icon>
+                {{ item.favorite ? 'mdi-star' : 'mdi-star-outline' }}
+              </v-icon>
+            </v-btn>
+          </template>
+          {{ item.favorite ? 'Remove product as favorite' : 'Mark as favorite' }}
+        </v-tooltip>
       </template>
       <template v-slot:no-data>
         No data
@@ -96,6 +123,7 @@ export default {
       resetList: 'products/list/reset',
       add: 'products/add',
       edit: 'products/edit',
+      favorite: 'products/favorite',
     }),
     search: debounce(function () {
       this.getList({ query: this.searchQuery });
