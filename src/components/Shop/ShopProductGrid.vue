@@ -24,9 +24,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      productReady: 'products/list/ready',
-      productLoading: 'products/list/loading',
-      productItems: 'products/list/value/items',
+      productReady: 'shop/products/list/ready',
+      productItems: 'shop/products/list/value',
     }),
   },
 };

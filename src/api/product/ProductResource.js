@@ -32,4 +32,8 @@ export default class BranchResource extends ResourceClient {
       .then(response => response)
       .catch(error => error.response);
   }
+
+  filter (filter, params = { sort: 'created_at', direction: 'asc', query: '' }) {
+    return super.get({ url: `${this._url}/list/${filter}`, params });
+  }
 }

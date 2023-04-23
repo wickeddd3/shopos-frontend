@@ -4,5 +4,9 @@ export default {
   show: true,
   products: {
     layout: shopProductsLayout,
+    list: {
+      ready: false,
+      value: null,
+    },
   },
 };

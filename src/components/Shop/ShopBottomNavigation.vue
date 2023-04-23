@@ -6,19 +6,19 @@
     horizontal
     fixed
   >
-    <v-btn>
+    <v-btn to="/shop?filter=all" exact>
       <span>All Products</span>
       <v-icon>mdi-package-variant</v-icon>
     </v-btn>
-    <v-btn>
+    <v-btn to="/shop?filter=discounted" exact>
       <span>Discounted</span>
       <v-icon>mdi-sale-outline</v-icon>
     </v-btn>
-    <v-btn>
+    <v-btn to="/shop?filter=favorites" exact>
       <span>Favorites</span>
       <v-icon>mdi-star-outline</v-icon>
     </v-btn>
-    <v-btn>
+    <v-btn to="/shop?filter=recent" exact>
       <span>Recent Purchased</span>
       <v-icon>mdi-playlist-star</v-icon>
     </v-btn>

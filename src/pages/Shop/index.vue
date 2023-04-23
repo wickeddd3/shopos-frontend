@@ -64,10 +64,18 @@ export default {
   },
   created () {
     Promise.all([
-      this.getProductList(),
       this.getCategoryList(),
       this.getTagList(),
     ]);
+  },
+  beforeRouteEnter (to, from, next) {
+    next(async vm => {
+      vm.getProductList(to);
+    });
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.getProductList(to);
+    next();
   },
   destroyed () {
     Promise.all([
@@ -78,10 +86,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      getProductList: 'products/list/get',
+      getProductList: 'shop/products/list/get',
       getCategoryList: 'categories/list/get',
       getTagList: 'tags/list/get',
-      resetProductList: 'products/list/reset',
+      resetProductList: 'shop/products/list/reset',
       resetCategoryList: 'categories/list/reset',
       resetTagList: 'tags/list/reset',
       closeSnackbar: 'appsnackbar/close',
