@@ -133,15 +133,6 @@ export default [
         component: () => import(/* webpackChunkName: "stores" */ '../pages/Stores/index.vue'),
       },
       {
-        path: '/reports',
-        name: 'Reports',
-        meta: {
-          authOnly: true,
-          breadcrumb: 'Reports',
-        },
-        component: () => import(/* webpackChunkName: "reports" */ '../pages/Reports/index.vue'),
-      },
-      {
         path: '/transactions',
         name: 'Transactions',
         meta: {

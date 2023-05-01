@@ -7,12 +7,6 @@ export default [
   },
   {
     type: 'list-item',
-    title: 'Reports',
-    icon: 'mdi-file-chart-outline',
-    route: '/reports',
-  },
-  {
-    type: 'list-item',
     title: 'Transactions',
     icon: 'mdi-format-list-checkbox',
     route: '/transactions',
