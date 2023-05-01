@@ -76,7 +76,7 @@ export default {
 <style scoped>
 .discount-label {
   position: absolute;
-  z-index: 100;
+  z-index: 2;
   margin: 4px;
   right: 0;
   opacity: 0.8;
