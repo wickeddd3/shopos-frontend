@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Chart from 'chart.js/dist/Chart.min.js';
+import Chart from 'chart.js';
 
 export default {
   name: 'LineChart',
@@ -38,9 +38,9 @@ export default {
   watch: {
     data () {
       this.updateChart();
-    }
+    },
   },
-  mounted() {
+  mounted () {
     this.renderChart();
   },
   methods: {
@@ -85,7 +85,7 @@ export default {
           tension: 0.01,
           borderWidth: 1,
         }],
-      },
+      };
       this.chart.update();
     },
   },

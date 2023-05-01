@@ -11,4 +11,5 @@ export default {
     data: [],
     ready: false,
   },
+  total: {},
 };

@@ -1,6 +1,8 @@
 import initialState from '@/config/sales.state.js';
 import SalesResource from '@/api/sales/SalesResource';
 import moment from 'moment';
+import { capitalize } from 'lodash';
+import { toCurrency } from '@/utils/currency';
 
 const resource = new SalesResource();
 
@@ -36,7 +38,7 @@ const getters = {
   'daily/data/days': ({ daily: { data } }) => (data || []).map(item => item.date),
   'daily/data/days/formatted': ({ daily: { data } }) => (data || []).map(item => ({
     ...item,
-    date: moment(item.date).format('D')
+    date: moment(item.date).format('D'),
   })),
   'daily/labels': () => [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
@@ -52,12 +54,32 @@ const getters = {
       return (data ? data?.sales : 0) * 1;
     });
   },
+  'total/summary': ({ total }) => Object.entries(total || {}).map(item => {
+    let icon = 'mdi-currency-usd';
+    let total = item[1];
+    if (item[0] === 'sales') {
+      icon = 'mdi-chart-timeline-variant';
+      total = toCurrency(total);
+    } else if (item[0] === 'orders') {
+      icon = 'mdi-cart-outline';
+    } else if (item[0] === 'products') {
+      icon = 'mdi-package-variant-closed';
+    } else if (item[0] === 'branches') {
+      icon = 'mdi-store-outline';
+    }
+    return {
+      name: capitalize(item[0]),
+      total,
+      icon,
+    };
+  }),
 };
 
 const mutations = {
   'YEARLY/SET': (state, data) => { state.yearly = { ...state.yearly, ...data }; },
   'MONTHLY/SET': (state, data) => { state.monthly = { ...state.monthly, ...data }; },
   'DAILY/SET': (state, data) => { state.daily = { ...state.daily, ...data }; },
+  'TOTAL/SET': (state, total) => { state.total = { ...state.total, ...total }; },
 };
 
 const actions = {
@@ -76,6 +98,12 @@ const actions = {
     const params = { month };
     const { data } = await resource.daily(params);
     commit('DAILY/SET', { data, ready: true });
+    return data;
+  },
+  'total/get': async ({ commit }, year) => {
+    const params = { year };
+    const { data } = await resource.total(params);
+    commit('TOTAL/SET', data);
     return data;
   },
 };

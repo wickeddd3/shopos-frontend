@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Chart from 'chart.js/dist/Chart.min.js';
+import Chart from 'chart.js';
 
 export default {
   name: 'BarChart',
@@ -38,9 +38,9 @@ export default {
   watch: {
     data () {
       this.updateChart();
-    }
+    },
   },
-  mounted() {
+  mounted () {
     this.renderChart();
   },
   methods: {
@@ -55,18 +55,18 @@ export default {
             data: this.data,
             backgroundColor: 'rgb(53,73,94)',
             borderColor: 'rgb(245,245,245)',
-            borderWidth: 1
-          }]
+            borderWidth: 1,
+          }],
         },
         options: {
           scales: {
             yAxes: [{
               ticks: {
-                beginAtZero: true
-              }
-            }]
-          }
-        }
+                beginAtZero: true,
+              },
+            }],
+          },
+        },
       });
     },
     updateChart () {
@@ -77,11 +77,11 @@ export default {
           data: this.data,
           backgroundColor: 'rgb(53,73,94)',
           borderColor: 'rgb(245,245,245)',
-          borderWidth: 1
-        }]
-      },
+          borderWidth: 1,
+        }],
+      };
       this.chart.update();
     },
   },
-}
+};
 </script>

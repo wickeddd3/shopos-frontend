@@ -16,4 +16,8 @@ export default class SalesResource extends ResourceClient {
   daily (params = { month: '' }) {
     return super.get({ url: `${this._url}/daily`, params });
   }
+
+  total (params = { year: '' }) {
+    return super.get({ url: `${this._url}/total`, params });
+  }
 }

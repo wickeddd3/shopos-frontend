@@ -1,6 +1,25 @@
 <template>
   <app-content class="v-page-dashboard">
     <v-container
+      class="pa-0 mb-8 d-flex"
+      fluid
+    >
+      <v-row>
+        <v-col v-for="summary in totalSummary" :key="summary.name">
+          <v-card class="pa-4">
+            <div class="d-flex flex-column">
+              <h3 class="font-weight-regular pb-2">{{ summary.name }}</h3>
+              <div class="d-flex">
+                <v-icon color="green">{{ summary.icon }}</v-icon>
+                <h2 class="font-weight-bold px-4">{{ summary.total }}</h2>
+              </div>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container
       class="pa-0 mb-15"
       fluid
     >
@@ -15,7 +34,7 @@
               hide-details
               solo
               dense
-              @change="getMonthlySales(year)"
+              @change="getMonthlySales(year); getTotal(year);"
             ></v-select>
           </span>
         </v-card-title>
@@ -92,6 +111,7 @@ export default {
       dailyReady: 'sales/daily/ready',
       dailyLabels: 'sales/daily/labels',
       dailyTotal: 'sales/daily/total',
+      totalSummary: 'sales/total/summary',
     }),
   },
   created () {
@@ -102,6 +122,7 @@ export default {
       this.getYearlySales(),
       this.getMonthlySales(currentYear),
       this.getDailySales(currentMonth),
+      this.getTotal(currentYear),
     ]);
   },
   methods: {
@@ -109,6 +130,7 @@ export default {
       getYearlySales: 'sales/yearly/get',
       getMonthlySales: 'sales/monthly/get',
       getDailySales: 'sales/daily/get',
+      getTotal: 'sales/total/get',
     }),
   },
 };
